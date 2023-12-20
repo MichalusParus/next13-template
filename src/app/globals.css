@@ -7,3 +7,39 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
+
+*::-webkit-scrollbar {
+  width: 0.5rem;
+  border: 0;
+  background: transparent;
+}
+*::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+*::-webkit-scrollbar-thumb {
+  width: 0.5rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 0.5rem;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* Animations */
+
+@keyframes loaderAnim {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+@keyframes ghostAnim {
+  100% {
+    transform: translateX(100%);
+  }
+}

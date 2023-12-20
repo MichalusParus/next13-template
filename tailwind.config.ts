@@ -1,51 +1,95 @@
-import type { Config } from 'tailwindcss';
+import type { Config } from 'tailwindcss'
 
-// prettier-ignore
 const config: Config = {
-  content: [
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+  content: ['./src/components/**/*.{js,ts,jsx,tsx,mdx}', './src/app/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
-      height:{
-        'headerHeight':'4.25rem'
+      fontSize: {
+        sm: '0.875rem',
+        md: '1rem',
+        lg: '1.125rem',
+        xl: '1.25rem',
+        '2xl': '1.5rem',
+        '3xl': '1.75rem',
       },
-      maxWidth: {'contentSize':'1400px'},
+      lineHeight: {
+        md: '1.5',
+      },
+      maxWidth: { contentSize: '1400px' },
+      backgroundImage: {
+        ghostBg: 'linear-gradient(90deg,rgba(0,0,0,0) 0, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0))',
+      },
       colors: {
-        'text':'#141414',
-        'title':'#141414',
-        'bg':'#C1C1C1',
-        'primary': {
-          'text':'#EBEBEB',
-          'textHover':'#EBEBEB',
-          'textActive':'#C2C2C2',
-          'bg':'#4C2F47',
-          'bgHover':'#331F2F',
-          'bgActive':'#4C2F47',
-          'border':'#000000',
+        text: '#0c150d',
+        title: '#0c150d',
+        placeholder: '#666666',
+        border: '#0c150d',
+        bg: '#f3f8f3',
+        overlay: 'rgba(0, 0, 0, 0.2)',
+        primary: {
+          text: '#0c150d',
+          textHover: '#0c150d',
+          textActive: '#0c150d',
+          '100': '#98C398',
+          '300': '#7EB47E',
+          '500': '#65a565',
+          '700': '#538D53',
+          '900': '#447444',
         },
-        'secondary': {
-          'text':'#141414',
-          'textHover':'#141414',
-          'textActive':'#3D3D3D',
-          'bg':'#C1C1C1',
-          'bgHover':'#B8B8B8',
-          'bgActive':'#C1C1C1',
-          'border':'#000000',
-        }
+        secondary: {
+          text: '#0c150d',
+          textHover: '#0c150d',
+          textActive: '#0c150d',
+          '100': '#E5E8F0',
+          '300': '#CCD2E1',
+          '500': '#a8b2cc',
+          '700': '#98A4C3',
+          '900': '#7E8EB4',
+        },
       },
       spacing: {
-        'sm':'0.375rem 0.75rem',
-        'md':'0.5rem 1rem',
-        'lg':'0.625rem 1.25rem',
-        'smIcon':'375rem',
-        'mdIcon':'0.5rem',
-        'lgicon':'0.625rem',
-        'headerHeight':'4.25rem'
-      }
+        smy: '0.375rem',
+        smx: '0.75rem',
+        mdy: '0.5rem',
+        mdx: '1rem',
+        lgy: '0.625rem',
+        lgx: '1.25rem',
+        smHeight: 'calc(theme(fontSize.sm) * theme(lineHeight.md))',
+        mdHeight: 'calc(theme(fontSize.md) * theme(lineHeight.md))',
+        lgHeight: 'calc(theme(fontSize.lg) * theme(lineHeight.md))',
+        smGhost: 'calc(theme(fontSize.sm)/4)',
+        mdGhost: 'calc(theme(fontSize.md)/4)',
+        lgGhost: 'calc(theme(fontSize.lg)/4)',
+        xlGhost: 'calc(theme(fontSize.xl)/4)',
+        '2xlGhost': 'calc(theme(fontSize.2xl)/4)',
+        '3xlGhost': 'calc(theme(fontSize.3xl)/4)',
+        headerHeight: '3.5rem',
+        mainHeight: 'calc(100vh - theme(spacing.headerHeight))',
+      },
+      height: {
+        sm: 'theme(fontSize.sm)',
+        md: 'theme(fontSize.md)',
+        lg: 'theme(fontSize.lg)',
+        xl: 'theme(fontSize.xl)',
+        '2xl': 'theme(fontSize.2xl)',
+        '3xl': 'theme(fontSize.3xl)',
+      },
+      boxShadow: {
+        button: '2px 2px 4px 0 rgb(0 0 0 / 0.3), inset -2px -2px 4px 0 rgb(0 0 0 / 0.3)',
+        active: '1px 1px 2px 0 rgb(0 0 0 / 0.3), inset 2px 2px 4px 0 rgb(0 0 0 / 0.3)',
+        modal: '4px 4px 8px 1px rgb(0 0 0 / 0.3), inset 0 0 12px 0 rgb(0 0 0 / 0.3)',
+        error: '0 0 6px 0 #C55959, inset 0 0 6px 0 #C55959',
+      },
+      transitionProperty: {
+        dropdown: 'top, left, bottom, right, transform, opacity',
+        activity: 'background-color, color, box-shadow',
+      },
+      animation: {
+        ghostAnim: 'ghostAnim 1500ms infinite',
+        loaderAnim: 'loaderAnim 1.4s infinite ease-in-out both',
+      },
     },
   },
   plugins: [],
-};
-export default config;
+}
+export default config
