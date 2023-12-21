@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import StaticPagination from './StaticPagination'
 import MobilePagination from './MobilePagination'
 
@@ -22,20 +23,23 @@ export default function Pagination({
   maxSpread,
   setPage,
 }: Props) {
-  const getPageSpread = (value: number) => {
-    if (maxSpread) {
-      if (maxSpread < value) {
-        return maxSpread
+  const getPageSpread = useCallback(
+    (value: number) => {
+      if (maxSpread) {
+        if (maxSpread < value) {
+          return maxSpread
+        } else {
+          return value
+        }
       } else {
         return value
       }
-    } else {
-      return value
-    }
-  }
+    },
+    [maxSpread]
+  )
 
   return (
-    <div className={`PaginationWrap relative ${className}`}>
+    <div className={`PaginationWrap ${className} relative`}>
       <div className='PaginationInnerWrap flex sm:hidden'>
         <MobilePagination
           data={data}

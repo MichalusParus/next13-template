@@ -3,13 +3,12 @@ import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Logo from './Logo'
 import NavBar from './NavBar'
-import SearchForm from './SearchForm'
+import SearchBar from '../../molecules/form/SearchBar'
 import Drawer from '../../molecules/popover/Drawer'
 import Hamburger from '../../atoms/common/Hamburger'
 
 export default function TopPanel() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
   const pathName = usePathname()
 
   useEffect(() => {
@@ -18,7 +17,7 @@ export default function TopPanel() {
 
   return (
     <header
-      className={`flex h-headerHeight w-full items-center border-b border-border bg-primary-500 py-4 shadow-button`}
+      className={`flex h-headerHeight w-full items-center border-b border-border bg-primary-500 py-4 pr-2 shadow-button`}
     >
       <div className='mx-6 flex w-full max-w-contentSize items-center justify-between md:mx-10 xl:mx-14 2xl:mx-auto'>
         <div className='flex items-center'>
@@ -31,14 +30,15 @@ export default function TopPanel() {
             padding='0px'
             setIsOpen={setIsMenuOpen}
             drawerButton={<Hamburger isOpen={isMenuOpen} onClick={setIsMenuOpen} />}
+            role={'menu'}
           >
-            <SearchForm className='mx-4 pb-2 pt-4' />
+            <SearchBar className='mx-4 pb-2 pt-4' placeholder='Search...' />
             <NavBar menu onClick={setIsMenuOpen} />
           </Drawer>
           <Logo />
           <NavBar className={'hidden md:flex'} />
         </div>
-        <SearchForm className='hidden md:flex' />
+        <SearchBar className='hidden md:flex' placeholder='Search...' />
       </div>
     </header>
   )

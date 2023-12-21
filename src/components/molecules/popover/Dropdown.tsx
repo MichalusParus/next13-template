@@ -16,6 +16,7 @@ type Props = {
   isUnlocked?: boolean
   error?: boolean
   dropdownButton?: React.ReactNode | React.ReactNode[]
+  role?: string
   children: React.ReactNode | React.ReactNode[]
   setIsOpen: (value: boolean) => void
 }
@@ -35,6 +36,7 @@ export default function Dropdown({
   error,
   dropdownButton,
   children,
+  role,
   setIsOpen,
 }: Props) {
   const dropdownTransition = `transition-dropdown ${isOpen ? `visible opacity-100 ` : 'invisible opacity-0 '}`
@@ -68,7 +70,7 @@ export default function Dropdown({
   }
 
   return (
-    <div className={`DropdownWrap ${className} ${!isUnlocked ? 'relative' : ''}`}>
+    <div className={`DropdownWrap ${className} ${!isUnlocked ? 'relative' : ''}`} role={role}>
       <div className={`DropdownButtonWrap relative ${isOpen ? 'z-40' : 'z-20'} ${!hideChevron ? 'w-full' : ''}`}>
         {!dropdownButton ? (
           <Button
@@ -101,7 +103,7 @@ export default function Dropdown({
         )}
       </div>
       <div
-        className={`DropdownInnerWrap z-[35] ${dropdownType[type]} ${dropdownStyle[style]} ${dropdownTransition} ${dropdownSize[size]} ${width}`}
+        className={`DropdownContentWrap z-[35] ${dropdownType[type]} ${dropdownStyle[style]} ${dropdownTransition} ${dropdownSize[size]} ${width}`}
       >
         {children}
       </div>

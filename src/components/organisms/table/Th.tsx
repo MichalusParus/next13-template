@@ -5,7 +5,6 @@ import TableFilter from './TableFilter'
 import Button from '../../atoms/common/Button'
 import ChevronIcon from '../../atoms/icons/ChevronIcon'
 import Title from '../../atoms/typography/Title'
-import Tooltip from '../../atoms/common/Tooltip'
 
 type Props = {
   name?: string
@@ -35,6 +34,30 @@ export default function Th({
   handleFilter,
 }: Props) {
   const [isFilterOpen, setIsFilterOpen] = useState(false)
+
+  const handleSorting = useCallback(() => {
+    if (setSorting && sorting.value === column.name) {
+      if (sorting.type === 'none') {
+        setSorting({ value: column.name, type: 'asc' })
+      } else if (sorting.type === 'asc') {
+        setSorting({ value: column.name, type: 'dec' })
+      } else if (sorting.type === 'dec') {
+        setSorting({ value: '', type: 'none' })
+      }
+    } else if (setSorting) {
+      setSorting({ value: column.name, type: 'asc' })
+    }
+  }, [sorting, column.name, setSorting])
+
+  const onSubmit = useCallback(
+    (value: string) => {
+      if (handleFilter) {
+        const filterIn = column.name
+        handleFilter({ filterIn: filterIn, filterBy: value })
+      }
+    },
+    [column.name, handleFilter]
+  )
 
   const thStyle = {
     primary: 'border border-primary-900 bg-primary-500 text-primary-text ',
@@ -74,30 +97,6 @@ export default function Th({
       : sorting.type === 'asc'
       ? 'opacity-100 rotate-180'
       : 'opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100'
-
-  const handleSorting = useCallback(() => {
-    if (setSorting && sorting.value === column.name) {
-      if (sorting.type === 'none') {
-        setSorting({ value: column.name, type: 'asc' })
-      } else if (sorting.type === 'asc') {
-        setSorting({ value: column.name, type: 'dec' })
-      } else if (sorting.type === 'dec') {
-        setSorting({ value: '', type: 'none' })
-      }
-    } else if (setSorting) {
-      setSorting({ value: column.name, type: 'asc' })
-    }
-  }, [sorting, column.name, setSorting])
-
-  const onSubmit = useCallback(
-    (value: { filterBy: string }) => {
-      if (handleFilter) {
-        const filterIn = column.name
-        handleFilter({ filterIn: filterIn, filterBy: value.filterBy })
-      }
-    },
-    [column.name, handleFilter]
-  )
 
   if (handleAll && selectAll) {
     return (

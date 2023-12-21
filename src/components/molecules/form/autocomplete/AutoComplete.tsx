@@ -102,6 +102,7 @@ export const AutoComplete = forwardRef(
           overlay
           setIsOpen={setIsOpen}
           padding=' '
+          role='combobox'
           dropdownButton={
             <div
               className={`AutoCompleteInputWrap relative w-full ${isOpen ? 'z-40' : 'z-20'}`}
@@ -128,7 +129,7 @@ export const AutoComplete = forwardRef(
         >
           <ul className={`max-h-40 overflow-y-auto`}>
             {filteredOptions.map(({ value: optionValue, label }) => (
-              <li key={optionValue}>
+              <li key={optionValue} role='option' aria-selected={optionValue === value}>
                 <Button
                   onClick={() => handleChange(optionValue)}
                   className={`${optionValue === value ? 'selected' : 'nooo'}`}

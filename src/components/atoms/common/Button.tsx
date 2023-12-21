@@ -47,7 +47,7 @@ export default function Button({
       'active:border-overlay active:bg-overlay active:shadow-active ' +
       '[&.selected]:border-overlay [&.selected]:bg-overlay [&.selected]:text-bg [&.selected]:shadow-active ',
     delete:
-      'border border-primary-text rounded-md bg-red-500 text-primary-text shadow-button ' +
+      'border border-primary-text rounded-md bg-red-600 text-primary-text shadow-button ' +
       'hover:bg-red-700 hover:text-primary-textHover hover:shadow-button ' +
       'focus-visible:bg-red-700 focus-visible:text-primary-textHover focus-visible:shadow-button ' +
       'active:bg-red-400 active:text-primary-textActive active:shadow-active ' +
@@ -72,7 +72,7 @@ export default function Button({
 
   return (
     <button
-      className={`${className} flex items-center justify-center font-medium transition-activity focus:outline-none ${buttonStyle[style]} ${errorStyle} ${buttonSize[size]}`}
+      className={`${className} flex items-center justify-center font-semibold transition-activity focus:outline-none ${buttonStyle[style]} ${errorStyle} ${buttonSize[size]}`}
       type={type}
       disabled={disabled}
       onClick={onClick}

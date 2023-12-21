@@ -1,3 +1,4 @@
+'use client'
 import Section from '@/src/components/atoms/common/Section'
 import SettingIcon from '@/src/components/atoms/icons/SettingIcon'
 import Form from '@/src/components/molecules/form/Form'
@@ -24,6 +25,7 @@ export default function FormComponents() {
     <Section className='relative mt-8' title='Form' type='center'>
       <div className='absolute right-0 top-0'>
         <Dropdown
+          className='[&_.DropdownContentWrap]:pt-0'
           type='right'
           isOpen={isOpen}
           setIsOpen={setIsOpen}
@@ -31,7 +33,7 @@ export default function FormComponents() {
           overlay
           style='none'
           size='lg'
-          width='w-56'
+          width='w-[10rem]'
           padding='0'
           title={<SettingIcon />}
         >

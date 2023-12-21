@@ -22,7 +22,7 @@ export default function NextImage({
   ...rest
 }: Props) {
   return (
-    <div className={`relative ${className}`} style={{ width: `${width}` }}>
+    <div className={`${className} relative`} style={{ width: `${width}` }}>
       {isLoading ? (
         <div style={{ height: `calc(${width} * ${ratio} / 100)` }}>
           <Ghost className={`h-full w-full`} />

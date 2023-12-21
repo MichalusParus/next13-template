@@ -10,7 +10,7 @@ type Props = {
 
 export default function Span({ className = '', type = 'bold', style = 'primary', size = 'lg', children }: Props) {
   const spanType = {
-    bold: 'font-bold',
+    bold: 'font-semibold',
     italic: 'italic',
     underline: 'underline',
     none: '',

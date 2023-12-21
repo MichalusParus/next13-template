@@ -1,3 +1,4 @@
+'use client'
 import { useEffect, useState } from 'react'
 import Button from '@/src/components/atoms/common/Button'
 import Ghost from '@/src/components/atoms/common/Ghost'
@@ -139,34 +140,20 @@ export default function CommonComponents() {
       </Section>
 
       <Section className='w-full md:w-[47%]' type='center' title={'Loader'}>
-        <div className='flex h-[10rem] flex-col justify-center'>
+        <div className='flex h-full items-center justify-center'>
           <Tooltip className='mb-4' title='Primary Loader'>
             <Loader />
-          </Tooltip>
-          <Tooltip className='mb-4' title='Secondary Loader'>
-            <Loader style='secondary' />
           </Tooltip>
         </div>
       </Section>
 
       <Section className='w-full md:w-[47%]' type='center' title={'Ghost'}>
         <div className='my-12 flex w-full justify-center'>
-          <Ghost className='h-[10rem] w-[10rem]' />
+          <Ghost className='h-[2rem] w-[10rem]' />
         </div>
       </Section>
 
       <Section className='w-full md:w-[47%]' type='center' title={'Avatar'}>
-        <div className='my-12 flex w-full justify-around'>
-          <Tooltip title='Unloged sm'>
-            <Avatar size='sm' />
-          </Tooltip>
-          <Tooltip title='UserName sm'>
-            <Avatar size='sm' userName='Michal Sikora' />
-          </Tooltip>
-          <Tooltip title='ProfileIco sm'>
-            <Avatar size='sm' src='/favicon.ico' />
-          </Tooltip>
-        </div>
         <div className='my-12 flex w-full justify-around'>
           <Tooltip title='Unloged md'>
             <Avatar />
@@ -176,17 +163,6 @@ export default function CommonComponents() {
           </Tooltip>
           <Tooltip title='ProfileIco md'>
             <Avatar src='/favicon.ico' />
-          </Tooltip>
-        </div>
-        <div className='my-12 flex w-full justify-around'>
-          <Tooltip title='Unloged lg'>
-            <Avatar size='lg' />
-          </Tooltip>
-          <Tooltip title='UserName lg'>
-            <Avatar size='lg' userName='Michal Sikora' />
-          </Tooltip>
-          <Tooltip title='ProfileIco lg'>
-            <Avatar size='lg' src='/favicon.ico' />
           </Tooltip>
         </div>
       </Section>

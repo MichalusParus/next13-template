@@ -30,6 +30,7 @@ export default function TBody({
   const mergedSubColumns = columns.map((c) => c.columns).flat()
   const columnsInRow = haveSubColumns ? mergedSubColumns : columns
   const isRowInteractive = onRowClick || multiselect
+
   const selectedClass = useCallback(
     (rowId: string) => {
       return selectedRows.map((r) => r.id).includes(rowId) ? 'selected' : ''

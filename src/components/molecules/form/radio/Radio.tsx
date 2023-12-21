@@ -86,7 +86,7 @@ export const Radio = forwardRef(
         hideLabel={hideLabel}
         hideError={hideError}
       >
-        <div className={`RadioGroupWrap flex flex-wrap ${type === 'column' ? 'flex-col' : ''}`}>
+        <div className={`RadioGroupWrap flex flex-wrap ${type === 'column' ? 'flex-col' : ''}`} role='radiogroup'>
           {options.map(({ value: radioValue, label: radioLabel }) => (
             <label
               key={radioValue}

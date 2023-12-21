@@ -1,7 +1,3 @@
-export const getResponsiveValues = (array: any[]) => {
-  return [array[0], array[1] ? array[1] : array[0], array[2] ? array[2] : array[1] ? array[1] : array[0]]
-}
-
 export const slugify = (title: string) => {
   return title
     .toLowerCase()

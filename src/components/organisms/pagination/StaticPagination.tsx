@@ -26,6 +26,18 @@ export default function StaticPagination({
 }: Props) {
   const pages = availablePages(data, itemsPerPage)
   const sidePagesCount = (pageSpread - 5) / 2
+
+  const aroundPages = useCallback(() => {
+    if (selectedPage < sidePagesCount + 4) {
+      return pages.slice(0, sidePagesCount * 2 + 3)
+    } else if (selectedPage > pages.length - (sidePagesCount + 3)) {
+      return pages.slice(pages.length - (sidePagesCount * 2 + 3), pages.length)
+    }
+    return pages.filter((page) => page >= selectedPage - sidePagesCount && page <= selectedPage + sidePagesCount)
+  }, [selectedPage, sidePagesCount, pages])
+
+  const displayablePages = pages.length > sidePagesCount * 2 + 6 ? aroundPages() : pages
+
   const buttonSize = {
     sm: 'min-w-[2rem] mx-1 ',
     md: 'min-w-[2.375rem] mx-1 md:mx-2 ',
@@ -42,19 +54,8 @@ export default function StaticPagination({
     none: '',
   }
 
-  const aroundPages = useCallback(() => {
-    if (selectedPage < sidePagesCount + 4) {
-      return pages.slice(0, sidePagesCount * 2 + 3)
-    } else if (selectedPage > pages.length - (sidePagesCount + 3)) {
-      return pages.slice(pages.length - (sidePagesCount * 2 + 3), pages.length)
-    }
-    return pages.filter((page) => page >= selectedPage - sidePagesCount && page <= selectedPage + sidePagesCount)
-  }, [selectedPage, sidePagesCount, pages])
-
-  const displayablePages = pages.length > sidePagesCount * 2 + 6 ? aroundPages() : pages
-
   return (
-    <div className={`StaticPaginationWrap flex items-center justify-center ${className}`}>
+    <div className={`StaticPaginationWrap ${className} flex items-center justify-center`}>
       <Button
         className={`LeftChevronButton absolute top-1/2 translate-y-[-50%] [&_svg]:rotate-90 ${chevronPosition[size]} ${
           selectedPage === 1 ? 'hidden' : 'flex'

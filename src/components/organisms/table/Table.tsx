@@ -1,3 +1,4 @@
+'use client'
 import { useCallback, useEffect, useState } from 'react'
 import { ColumnsDef, RowDef, SortingDef } from './types'
 import TBody from './TBody'
@@ -13,6 +14,7 @@ type Props = {
   rowsPerPage?: number
   style?: 'primary' | 'secondary' | 'none'
   size?: 'sm' | 'md' | 'lg'
+  maxHeight?: string
   multiselect?: { submitLabel: string; handleMultiselect: (value: RowDef[]) => void }
   onRowClick?: (value: RowDef) => void
 }
@@ -25,6 +27,7 @@ export default function Table({
   rowsPerPage = 20,
   style = 'primary',
   size = 'md',
+  maxHeight,
   multiselect,
   onRowClick,
 }: Props) {
@@ -112,7 +115,9 @@ export default function Table({
   }
 
   return (
-    <div className={`TableWrap ${className} relative rounded-md border-2 shadow-button ${tableStyle[style]} `}>
+    <div
+      className={`TableWrap ${className} max-w-[92vw] overflow-auto rounded-md border-2 shadow-button ${maxHeight} ${tableStyle[style]} `}
+    >
       <table className={`overflow-hidden rounded-md border`}>
         <TableHeader
           name={name}

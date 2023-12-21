@@ -1,7 +1,7 @@
+import { Metadata } from 'next'
 import Section from '@/src/components/atoms/common/Section'
 import List from '@/src/components/atoms/typography/List'
 import P from '@/src/components/atoms/typography/P'
-import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'About || Next 13 Template',
@@ -27,6 +27,12 @@ export default function AboutPage() {
             title='#2/parus components'
             liType='list-[circle]'
             content={['common', 'typography', 'icons', 'form', 'popovers', 'pagination', 'table', 'components page']}
+          />
+          <List
+            className='mb-6'
+            title='#2.1/components update'
+            liType='list-[circle]'
+            content={['tabs reworked', 'components roles', 'SearchBar', 'componentsPage update']}
           />
         </div>
       </Section>

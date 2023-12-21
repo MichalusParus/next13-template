@@ -15,6 +15,7 @@ type Props = {
   submit?: string | React.ReactNode
   hideError?: boolean
   disabled?: boolean
+  role?: string
   success?: { label: string; message: string; onSuccess: () => void }
   children: React.ReactNode | React.ReactNode[]
   onSubmit: (values: any) => void
@@ -31,6 +32,7 @@ export default function Form({
   hideError,
   submit,
   disabled,
+  role,
   success,
   children,
   onSubmit,
@@ -48,7 +50,11 @@ export default function Form({
   return (
     <div className={`relative rounded-xl ${className} ${formStyle[style]}`}>
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)} className={`flex w-full flex-wrap items-center justify-center`}>
+        <form
+          className={`flex w-full flex-wrap items-center justify-center`}
+          onSubmit={methods.handleSubmit(onSubmit)}
+          role={role}
+        >
           {children}
           {!hideError && (
             <div className='my-2 flex h-6 w-full items-center justify-center'>

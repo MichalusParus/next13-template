@@ -19,7 +19,7 @@ export default function RootLayout({ children }: Props) {
     <html lang='en'>
       <body className={`${inter.className} bg-bg text-text`}>
         <TopPanel />
-        <main className='h-mainHeight w-full overflow-x-auto'>
+        <main className='h-mainHeight w-full overflow-y-scroll'>
           <div className='LayoutWrap mx-2 max-w-contentSize py-6 md:mx-10 md:py-10 xl:mx-14 xl:py-14 2xl:mx-auto'>
             {children}
           </div>

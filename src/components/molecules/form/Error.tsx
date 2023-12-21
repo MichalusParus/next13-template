@@ -24,7 +24,7 @@ export default function Error({ className = '', type = 'error', size = 'md', err
 
   return (
     <div
-      className={`${className} ${type === 'error' ? 'text-red-700' : 'text-green-700'} ${
+      className={`ErrorWrap ${className} ${type === 'error' ? 'text-red-700' : 'text-green-700'} ${
         Boolean(error) ? 'visible' : 'invisible'
       }`}
     >

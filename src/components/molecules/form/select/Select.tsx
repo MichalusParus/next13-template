@@ -71,10 +71,11 @@ export const Select = forwardRef(
           overlay
           error={Boolean(error)}
           setIsOpen={setIsOpen}
+          role={'select'}
         >
           <ul>
             {sortedOptions.map(({ value: optionValue, label }) => (
-              <li key={optionValue}>
+              <li key={optionValue} role='option' aria-selected={optionValue === value}>
                 <Button
                   onClick={() => handleOnChange(optionValue)}
                   className={`${optionValue === value ? 'selected' : ''}`}

@@ -1,8 +1,8 @@
 'use client'
+import { useCallback } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import Button from '../../atoms/common/Button'
 import NextLink from '../../atoms/common/NextLink'
-import { useCallback } from 'react'
 
 const navLinks = [
   {
@@ -47,7 +47,7 @@ export default function NavBar({ className, menu, onClick = () => {} }: Props) {
     <nav className={className}>
       <ul className={menu ? 'flex flex-col' : 'flex pt-1'}>
         {navLinks.map(({ slug, title }) => (
-          <li key={slug} className='flex justify-center'>
+          <li key={slug} className='flex justify-center' role={menu ? 'menuitem' : ''}>
             {pathName === '/' + slug && menu ? (
               <Button
                 className={`selected ${navLinkStyle} ${navLinkSize}`}
@@ -58,7 +58,7 @@ export default function NavBar({ className, menu, onClick = () => {} }: Props) {
                 {title}
               </Button>
             ) : (
-              <NextLink className={`${navLinkStyle} ${navLinkSize}`} href={`/${slug}`} style={'none'} size='none'>
+              <NextLink className={`flex ${navLinkStyle} ${navLinkSize}`} href={`/${slug}`} style={'none'} size='none'>
                 {title}
               </NextLink>
             )}

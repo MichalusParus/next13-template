@@ -1,3 +1,4 @@
+'use client'
 import { useState } from 'react'
 import Button from '@/src/components/atoms/common/Button'
 import Section from '@/src/components/atoms/common/Section'

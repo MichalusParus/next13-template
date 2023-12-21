@@ -38,6 +38,7 @@ export default function Modal({
         className={`ModalWrap max-w-[93vw] rounded-xl bg-bg ${width} ${modalPosition} ${
           isOpen ? 'visible scale-100' : 'invisible scale-90'
         }`}
+        role='dialog'
       >
         <div className={`ModalInnerWrap ${className} relative w-full rounded-xl ${modalStyle[style]}`}>
           {title && (

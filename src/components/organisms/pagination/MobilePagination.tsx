@@ -1,6 +1,6 @@
+import { availablePages } from '@/src/components/utils/utils'
 import Button from '../../atoms/common/Button'
 import ChevronIcon from '../../atoms/icons/ChevronIcon'
-import { availablePages } from '@/src/components/utils/utils'
 
 type Props = {
   className?: string
@@ -22,6 +22,11 @@ export default function MobilePagination({
   setPage,
 }: Props) {
   const pages = availablePages(data, itemsPerPage)
+
+  const arrowPosition = {
+    left: 'absolute -left-10 top-1/2 translate-y-[-50%] rotate-90',
+    right: 'absolute -right-10 top-1/2 translate-y-[-50%] -rotate-90',
+  }
   const buttonStyle = {
     primary: 'text-primary-text',
     secondary: 'text-secondary-text',
@@ -35,10 +40,10 @@ export default function MobilePagination({
   }
 
   return (
-    <div className={`MobilePaginationWrap relative ${className}`}>
+    <div className={`MobilePaginationWrap ${className} relative`}>
       <div className={`cursor-default ${buttonStyle[style]} ${buttonSize[size]}`}>
         <Button
-          className={`LeftChevronButton absolute -left-10 top-1/2 translate-y-[-50%] rotate-90 ${buttonStyle[style]} ${
+          className={`LeftChevronButton ${arrowPosition['left']} ${buttonStyle[style]} ${
             selectedPage === 1 ? 'hidden' : 'flex'
           }`}
           style={'menu'}
@@ -48,9 +53,9 @@ export default function MobilePagination({
         />
         {selectedPage} / {pages.length || 1}
         <Button
-          className={`RightChevronButton absolute -right-10 top-1/2 translate-y-[-50%] -rotate-90 ${
-            buttonStyle[style]
-          } ${selectedPage === (pages.length || 1) ? 'hidden' : 'flex'}`}
+          className={`RightChevronButton ${arrowPosition['right']} ${buttonStyle[style]} ${
+            selectedPage === (pages.length || 1) ? 'hidden' : 'flex'
+          }`}
           style={'menu'}
           size={size}
           icon={<ChevronIcon />}

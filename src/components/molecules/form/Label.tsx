@@ -33,7 +33,7 @@ export const Label = ({
   }
 
   return (
-    <div className={`relative flex w-full flex-col md:flex-row ${className} ${hideError ? 'items-center' : 'mb-2'}`}>
+    <div className={`${className} relative flex w-full flex-col md:flex-row ${hideError ? 'items-center' : 'mb-2'}`}>
       <label
         className={`mb-1 mr-4 w-[50%] ${textColor} ${textSize[size]} ${hideLabel ? 'hidden' : ''}`}
         htmlFor={htmlFor}
