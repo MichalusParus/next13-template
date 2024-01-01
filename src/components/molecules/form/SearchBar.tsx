@@ -17,11 +17,11 @@ export default function SearchBar({ className = '', placeholder = '', onSubmit }
   const { push } = useRouter()
 
   const handleOnSubmit = useCallback(
-    (value: { search: string }) => {
+    (value: { searchItem: string }) => {
       if (onSubmit) {
-        onSubmit(value.search)
+        onSubmit(value.searchItem)
       } else {
-        push(`/search?search=${value.search}`)
+        push(`/search?search=${value.searchItem}`)
       }
     },
     [onSubmit, push]
@@ -30,7 +30,7 @@ export default function SearchBar({ className = '', placeholder = '', onSubmit }
   return (
     <Form
       className={`${className} relative flex `}
-      initialValues={{ search: '' }}
+      initialValues={{ searchItem: '' }}
       validationSchema={object().shape({})}
       style='none'
       hideError
@@ -39,7 +39,7 @@ export default function SearchBar({ className = '', placeholder = '', onSubmit }
     >
       <FormInput
         className={``}
-        name='search'
+        name='searchItem'
         label='search'
         type='search'
         style='secondary'

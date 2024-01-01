@@ -21,8 +21,8 @@ export default function Title({
 }: Props) {
   const ghostAlign = align?.split('-')[1] as 'left' | 'center' | 'right'
   const titleStyle = {
-    primary: `text-primary-text`,
-    secondary: `text-secondary-text`,
+    primary: `text-primary-text whitespace-pre-wrap`,
+    secondary: `text-secondary-text whitespace-pre-wrap`,
     none: '',
   }
   const titleSize = {

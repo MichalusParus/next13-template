@@ -1,28 +1,23 @@
-import { availablePages } from '@/src/components/utils/utils'
 import Button from '../../atoms/common/Button'
 import ChevronIcon from '../../atoms/icons/ChevronIcon'
 
 type Props = {
   className?: string
-  data: {}[]
+  pages: number[]
   selectedPage: number
-  itemsPerPage: number
   style?: 'primary' | 'secondary' | 'none'
   size?: 'sm' | 'md' | 'lg' | 'none'
-  setPage: (page: number) => void
+  setSelectedPage: (page: number) => void
 }
 
 export default function MobilePagination({
   className = '',
-  data,
+  pages,
   selectedPage,
-  itemsPerPage,
   style = 'primary',
   size = 'md',
-  setPage,
+  setSelectedPage,
 }: Props) {
-  const pages = availablePages(data, itemsPerPage)
-
   const arrowPosition = {
     left: 'absolute -left-10 top-1/2 translate-y-[-50%] rotate-90',
     right: 'absolute -right-10 top-1/2 translate-y-[-50%] -rotate-90',
@@ -40,7 +35,7 @@ export default function MobilePagination({
   }
 
   return (
-    <div className={`MobilePaginationWrap ${className} relative`}>
+    <div className={`MobilePaginationWrap ${className} relative ${pages.length > 1 ? 'visible' : 'invisible'}`}>
       <div className={`cursor-default ${buttonStyle[style]} ${buttonSize[size]}`}>
         <Button
           className={`LeftChevronButton ${arrowPosition['left']} ${buttonStyle[style]} ${
@@ -49,7 +44,7 @@ export default function MobilePagination({
           style={'menu'}
           size={size}
           icon={<ChevronIcon />}
-          onClick={() => setPage(selectedPage - 1)}
+          onClick={() => setSelectedPage(selectedPage - 1)}
         />
         {selectedPage} / {pages.length || 1}
         <Button
@@ -59,7 +54,7 @@ export default function MobilePagination({
           style={'menu'}
           size={size}
           icon={<ChevronIcon />}
-          onClick={() => setPage(selectedPage + 1)}
+          onClick={() => setSelectedPage(selectedPage + 1)}
         />
       </div>
     </div>

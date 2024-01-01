@@ -1,30 +1,27 @@
 import { useCallback } from 'react'
-import { availablePages } from '@/src/components/utils/utils'
+import { availablePages } from '@/src/utils/utils'
 import Button from '../../atoms/common/Button'
 import ChevronIcon from '../../atoms/icons/ChevronIcon'
 
 type Props = {
   className?: string
-  data: {}[]
+  pages: number[]
   selectedPage: number
-  itemsPerPage: number
   pageSpread: number
   style?: 'primary' | 'secondary' | 'none'
   size?: 'sm' | 'md' | 'lg'
-  setPage: (page: number) => void
+  setSelectedPage: (page: number) => void
 }
 
 export default function StaticPagination({
   className = '',
-  data,
+  pages,
   selectedPage,
-  itemsPerPage,
   pageSpread,
   style = 'primary',
   size = 'md',
-  setPage,
+  setSelectedPage,
 }: Props) {
-  const pages = availablePages(data, itemsPerPage)
   const sidePagesCount = (pageSpread - 5) / 2
 
   const aroundPages = useCallback(() => {
@@ -55,7 +52,11 @@ export default function StaticPagination({
   }
 
   return (
-    <div className={`StaticPaginationWrap ${className} flex items-center justify-center`}>
+    <div
+      className={`StaticPaginationWrap ${className} relative flex items-center justify-center ${
+        pages.length > 1 ? 'visible' : 'invisible'
+      }`}
+    >
       <Button
         className={`LeftChevronButton absolute top-1/2 translate-y-[-50%] [&_svg]:rotate-90 ${chevronPosition[size]} ${
           selectedPage === 1 ? 'hidden' : 'flex'
@@ -63,25 +64,25 @@ export default function StaticPagination({
         style={style}
         size={size}
         icon={<ChevronIcon />}
-        onClick={() => setPage(selectedPage - 1)}
+        onClick={() => setSelectedPage(selectedPage - 1)}
       />
-      {pages.length > sidePagesCount * 2 + 6 && selectedPage > sidePagesCount + 3 && (
+      {pages.length > sidePagesCount * 2 + 6 && selectedPage > sidePagesCount + 3 ? (
         <Button
           key={pages[0]}
           className={`PageButton ${selectedPage === pages[0] ? 'selected' : ''} ${buttonSize[size]}`}
           style={style}
           size={size}
           icon={String(pages[0])}
-          onClick={() => setPage(pages[0])}
+          onClick={() => setSelectedPage(pages[0])}
         />
-      )}
-      {pages.length > sidePagesCount * 2 + 6 && selectedPage > sidePagesCount + 3 && (
+      ) : null}
+      {pages.length > sidePagesCount * 2 + 6 && selectedPage > sidePagesCount + 3 ? (
         <div className={`DottWrap flex items-center justify-around ${buttonSize[size]}`}>
           <div className={dottStyle[style]} />
           <div className={dottStyle[style]} />
           <div className={dottStyle[style]} />
         </div>
-      )}
+      ) : null}
       {displayablePages.map((page) => (
         <Button
           key={page}
@@ -89,26 +90,26 @@ export default function StaticPagination({
           style={style}
           size={size}
           icon={String(page)}
-          onClick={() => setPage(page)}
+          onClick={() => setSelectedPage(page)}
         />
       ))}
-      {pages.length > sidePagesCount * 2 + 6 && selectedPage < pages.length - (sidePagesCount + 2) && (
+      {pages.length > sidePagesCount * 2 + 6 && selectedPage < pages.length - (sidePagesCount + 2) ? (
         <div className={`DottWrap flex items-center justify-around ${buttonSize[size]}`}>
           <div className={dottStyle[style]} />
           <div className={dottStyle[style]} />
           <div className={dottStyle[style]} />
         </div>
-      )}
-      {pages.length > sidePagesCount * 2 + 6 && selectedPage < pages.length - (sidePagesCount + 2) && (
+      ) : null}
+      {pages.length > sidePagesCount * 2 + 6 && selectedPage < pages.length - (sidePagesCount + 2) ? (
         <Button
           key={pages[pages.length - 1]}
           className={`PageButton ${selectedPage === pages[pages.length - 1] ? 'selected' : ''} ${buttonSize[size]}`}
           style={style}
           size={size}
           icon={String(pages[pages.length - 1])}
-          onClick={() => setPage(pages[pages.length - 1])}
+          onClick={() => setSelectedPage(pages[pages.length - 1])}
         />
-      )}
+      ) : null}
       <Button
         className={`RightChevronButton absolute top-1/2 translate-y-[-50%] [&_svg]:-rotate-90 ${
           chevronPosition[size]
@@ -116,7 +117,7 @@ export default function StaticPagination({
         style={style}
         size={size}
         icon={<ChevronIcon />}
-        onClick={() => setPage(selectedPage + 1)}
+        onClick={() => setSelectedPage(selectedPage + 1)}
       />
     </div>
   )

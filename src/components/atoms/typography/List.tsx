@@ -57,7 +57,7 @@ export default function List({
   if (isLoading) {
     return (
       <div className={`${className}`}>
-        {title && (
+        {title ? (
           <Title
             type={titleType[size] as 'h4' | 'h5' | 'h6'}
             style={style}
@@ -65,7 +65,7 @@ export default function List({
           >
             {title}
           </Title>
-        )}
+        ) : null}
         <div className='w-full'>
           {new Array(expectedLines).fill(null).map((line, index) => (
             <Ghost className={ghostSize[size]} key={index} />
@@ -77,11 +77,11 @@ export default function List({
 
   return (
     <div className={`${className} ${listStyle[style]}`}>
-      {title && (
+      {title ? (
         <Title type={titleType[size] as 'h4' | 'h5' | 'h6'} style={style} size={titleSize[size] as 'lg' | 'xl' | '2xl'}>
           {title}
         </Title>
-      )}
+      ) : null}
       {type === 'ul' ? (
         <ul className={`${liType} pl-4`}>
           {content.map((li, index) => (

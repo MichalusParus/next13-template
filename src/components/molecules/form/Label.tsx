@@ -41,9 +41,9 @@ export const Label = ({
         {label}
       </label>
       <div className='flex w-full flex-col items-start justify-start'>
-        {description && <div className='w-full px-3 pt-1 text-sm'>{description}</div>}
+        {description ? <div className='w-full px-3 pt-1 text-sm'>{description}</div> : null}
         {children}
-        {!hideError && <Error error={error} size={size} />}
+        {!hideError ? <Error error={error} size={size} /> : null}
       </div>
     </div>
   )

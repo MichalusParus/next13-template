@@ -4,7 +4,7 @@ import MobilePagination from '../pagination/MobilePagination'
 
 type Props = {
   columns: ColumnsDef[]
-  filteredData: RowDef[]
+  pages: number[]
   selectedPage: number
   rowsPerPage: number
   style?: 'primary' | 'secondary' | 'none'
@@ -15,7 +15,7 @@ type Props = {
 
 export default function TableFooter({
   columns,
-  filteredData,
+  pages,
   selectedPage,
   rowsPerPage,
   style = 'primary',
@@ -54,7 +54,7 @@ export default function TableFooter({
       <tr className={`${footerStyle[style]}`}>
         <td colSpan={(haveSubColumns ? mergedSubColumns.length : columns.length) + (multiselect ? 1 : 0)}>
           <div className='relative flex w-full items-center justify-between pl-4 pr-12 text-sm'>
-            <div className={`flex w-[4rem] ${filteredData.length < rowsPerPage ? 'invisible' : ''}`}>
+            <div className={`flex w-[4rem] ${pages.length > 1 ? 'visible' : 'invisible'}`}>
               Rows:
               <Select
                 className={`ml-2 [&_.DropdownButton]:pl-2 [&_svg]:right-0 ${selectStyle}`}
@@ -72,13 +72,12 @@ export default function TableFooter({
               />
             </div>
             <MobilePagination
-              className={`[&_button]:w-smHeight ${filteredData.length < rowsPerPage ? 'invisible' : ''}`}
-              data={filteredData}
-              itemsPerPage={rowsPerPage}
+              className={`[&_button]:w-smHeight`}
+              pages={pages}
               selectedPage={selectedPage}
               style={style}
               size={'none'}
-              setPage={setSelectedPage}
+              setSelectedPage={setSelectedPage}
             />
           </div>
         </td>

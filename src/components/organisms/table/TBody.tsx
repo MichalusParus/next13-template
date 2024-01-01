@@ -84,7 +84,7 @@ export default function TBody({
             onClick={() => handleOnRowClick(row)}
             tabIndex={isRowInteractive ? 0 : -1}
           >
-            {multiselect && (
+            {multiselect ? (
               <td className={`${selectedClass(row.id)} ${checkboxSize[size]}`}>
                 <Checkbox
                   type='fake'
@@ -97,7 +97,7 @@ export default function TBody({
                   onChange={() => {}}
                 />
               </td>
-            )}
+            ) : null}
             {columnsInRow.map((col) => (
               <td key={row.id + col!.name} className={`${selectedClass(row.id)} ${tdSize[size]}`}>
                 {/* @ts-expect-error */}

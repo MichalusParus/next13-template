@@ -55,7 +55,7 @@ export default function TableComponents() {
       width: 'auto',
     },
   ]
-  const data = new Array(100).fill(null).map((data, index) => ({
+  const data = new Array(110).fill(null).map((data, index) => ({
     id: 'data1' + index,
     name4: 'data1' + index,
     name5: 'data2' + index,

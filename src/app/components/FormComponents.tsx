@@ -71,7 +71,7 @@ export default function FormComponents() {
       </div>
       <Form
         className='w-full'
-        style={'none'}
+        style={'primary'}
         initialValues={{
           input: '',
           number: '',

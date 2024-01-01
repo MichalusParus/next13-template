@@ -94,20 +94,20 @@ export default function Dropdown({
         ) : (
           dropdownButton
         )}
-        {!hideChevron && dropdownButton && (
+        {!hideChevron && dropdownButton ? (
           <ChevronIcon
             className={`absolute right-2 top-[50%] z-40 translate-y-[-50%] transition-transform ${
               isOpen ? 'rotate-180' : ''
             } ${iconStyle[style]}`}
           />
-        )}
+        ) : null}
       </div>
       <div
         className={`DropdownContentWrap z-[35] ${dropdownType[type]} ${dropdownStyle[style]} ${dropdownTransition} ${dropdownSize[size]} ${width}`}
       >
         {children}
       </div>
-      {overlay && <Overlay isOpen={isOpen} onClick={() => setIsOpen(false)} />}
+      {overlay ? <Overlay isOpen={isOpen} onClick={() => setIsOpen(false)} /> : null}
     </div>
   )
 }

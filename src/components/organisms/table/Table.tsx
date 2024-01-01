@@ -1,6 +1,7 @@
 'use client'
 import { useCallback, useEffect, useState } from 'react'
 import { ColumnsDef, RowDef, SortingDef } from './types'
+import { usePagination } from '@/src/utils/hooks/usePagination'
 import TBody from './TBody'
 import TableFooter from './TableFooter'
 import TableHeader from './TableHeader'
@@ -34,10 +35,9 @@ export default function Table({
   const [filteredData, setFilteredData] = useState(rows)
   const [sorting, setSorting] = useState<SortingDef>({ value: '', type: 'none' })
   const [sortedData, setSortedData] = useState(filteredData)
-  const [pagedData, setPagedData] = useState(sortedData.slice(0, rowsPerPage))
   const [selectedRows, setSelectedRows] = useState<any[]>([])
-  const [selectedPage, setSelectedPage] = useState(1)
   const [rowsPerPageState, setRowsPerPageState] = useState(rowsPerPage)
+  const { pagedData, pages, selectedPage, setSelectedPage } = usePagination(sortedData, rowsPerPageState)
 
   const handleFilter = useCallback(
     (filter: { filterIn: string; filterBy: string }) => {
@@ -46,7 +46,7 @@ export default function Table({
       setFilteredData(filtered)
       setSelectedPage(1)
     },
-    [rows]
+    [rows, setSelectedPage]
   )
 
   const handleSelect = useCallback(
@@ -82,12 +82,6 @@ export default function Table({
       setSortedData(filteredData)
     }
   }, [sorting, filteredData])
-
-  useEffect(() => {
-    setPagedData(
-      sortedData.slice((selectedPage - 1) * rowsPerPageState, (selectedPage - 1) * rowsPerPageState + rowsPerPageState)
-    )
-  }, [selectedPage, sorting, sortedData, rowsPerPageState])
 
   // Accessibility keyboard handler
   useEffect(() => {
@@ -144,7 +138,7 @@ export default function Table({
         />
         <TableFooter
           columns={columns}
-          filteredData={filteredData}
+          pages={pages}
           selectedPage={selectedPage}
           rowsPerPage={rowsPerPageState}
           style={style}
@@ -153,7 +147,7 @@ export default function Table({
           setRowsPerPage={setRowsPerPageState}
         />
       </table>
-      {multiselect && (
+      {multiselect ? (
         <Button
           className={`absolute right-0 ${submitPosition[size]}`}
           style={style}
@@ -162,7 +156,7 @@ export default function Table({
         >
           {multiselect.submitLabel}
         </Button>
-      )}
+      ) : null}
     </div>
   )
 }

@@ -23,7 +23,7 @@ export default function Button({
   children,
   onClick,
 }: Props) {
-  const iconOnly = Boolean(icon && (!children || ![children].flat().some((x) => Boolean(x) === true)))
+  const iconOnly = Boolean(icon && (!children || ![children].flat().some((x) => x)))
 
   const buttonStyle = {
     primary:
@@ -47,9 +47,9 @@ export default function Button({
       'active:border-overlay active:bg-overlay active:shadow-active ' +
       '[&.selected]:border-overlay [&.selected]:bg-overlay [&.selected]:text-bg [&.selected]:shadow-active ',
     delete:
-      'border border-primary-text rounded-md bg-red-600 text-primary-text shadow-button ' +
-      'hover:bg-red-700 hover:text-primary-textHover hover:shadow-button ' +
-      'focus-visible:bg-red-700 focus-visible:text-primary-textHover focus-visible:shadow-button ' +
+      'border border-primary-text rounded-md bg-red-500 text-primary-text shadow-button ' +
+      'hover:bg-red-600 hover:text-primary-textHover hover:shadow-button ' +
+      'focus-visible:bg-red-600 focus-visible:text-primary-textHover focus-visible:shadow-button ' +
       'active:bg-red-400 active:text-primary-textActive active:shadow-active ' +
       'disabled:bg-zinc-400 disabled:text-zinc-800 disabled:shadow-none disabled:cursor-not-allowed',
     none: '',
@@ -72,7 +72,7 @@ export default function Button({
 
   return (
     <button
-      className={`${className} flex items-center justify-center font-semibold transition-activity focus:outline-none ${buttonStyle[style]} ${errorStyle} ${buttonSize[size]}`}
+      className={`${className} flex items-center justify-center whitespace-nowrap font-semibold transition-activity focus:outline-none ${buttonStyle[style]} ${errorStyle} ${buttonSize[size]}`}
       type={type}
       disabled={disabled}
       onClick={onClick}
@@ -82,7 +82,7 @@ export default function Button({
         <Loader style={loaderStyle} size={size} />
       ) : (
         <>
-          {icon && <div className={`IconWrap ${iconSize[size]} ${iconOnly ? '' : 'mr-2'}`}>{icon}</div>}
+          {icon ? <div className={`IconWrap ${iconSize[size]} ${iconOnly ? '' : 'mr-2'}`}>{icon}</div> : null}
           {children}
         </>
       )}

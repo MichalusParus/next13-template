@@ -142,7 +142,7 @@ export const AutoComplete = forwardRef(
               </li>
             ))}
           </ul>
-          {createNew && (
+          {createNew ? (
             <>
               <div className='mx-auto h-0.5 w-[90%] bg-overlay' />
               <Button
@@ -155,7 +155,7 @@ export const AutoComplete = forwardRef(
                 {createNew.title}
               </Button>
             </>
-          )}
+          ) : null}
         </Dropdown>
         <select
           name={name}

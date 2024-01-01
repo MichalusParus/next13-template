@@ -83,6 +83,7 @@ const config: Config = {
       transitionProperty: {
         dropdown: 'top, left, bottom, right, transform, opacity',
         activity: 'background-color, color, box-shadow',
+        disableAutofill: 'backgroundColor 600000s 0s, color 600000s 0s',
       },
       animation: {
         ghostAnim: 'ghostAnim 1500ms infinite',

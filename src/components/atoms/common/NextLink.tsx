@@ -10,7 +10,7 @@ type Props = {
 }
 
 export default function NextLink({ className = '', href, style = 'primary', size = 'md', icon, children }: Props) {
-  const iconOnly = Boolean(icon && (!children || ![children].flat().some((x) => Boolean(x) === true)))
+  const iconOnly = Boolean(icon && (!children || ![children].flat().some((x) => x)))
 
   const linkStyle = {
     primary:
@@ -54,9 +54,9 @@ export default function NextLink({ className = '', href, style = 'primary', size
   return (
     <Link
       href={href}
-      className={`${className} items-center justify-center font-medium transition-activity focus:outline-none ${linkStyle[style]} ${buttonSize[size]} ${errorStyle}`}
+      className={`${className} items-center justify-center whitespace-nowrap font-medium transition-activity focus:outline-none ${linkStyle[style]} ${buttonSize[size]} ${errorStyle}`}
     >
-      {icon && <div className={`IconWrap ${iconSize[size]} ${iconOnly ? '' : 'mr-2'}`}>{icon}</div>}
+      {icon ? <div className={`IconWrap ${iconSize[size]} ${iconOnly ? '' : 'mr-2'}`}>{icon}</div> : null}
       {children}
     </Link>
   )

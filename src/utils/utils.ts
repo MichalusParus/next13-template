@@ -15,3 +15,8 @@ export const availablePages = (data: any[], itemsPerPage: number) => {
   }
   return result
 }
+
+export const getSelectOptions = (array: string[]) => {
+  const selectOptions = array.map((label) => ({ label: label, value: slugify(label) }))
+  return selectOptions
+}

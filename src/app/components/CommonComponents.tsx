@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
+import { usePagination } from '@/src/utils/hooks/usePagination'
 import Button from '@/src/components/atoms/common/Button'
 import Ghost from '@/src/components/atoms/common/Ghost'
 import Loader from '@/src/components/atoms/common/Loader'
@@ -12,7 +13,6 @@ import NextLink from '@/src/components/atoms/common/NextLink'
 import ProfileIcon from '@/src/components/atoms/icons/ProfileIcon'
 
 export default function CommonComponents() {
-  const [selectedPage, setSelectedPage] = useState(10)
   const [isLoading, setIsLoading] = useState(true)
   type buttonType = 'primary' | 'secondary' | 'menu' | 'delete' | 'disabled'
   const buttonVariants: buttonType[] = ['primary', 'secondary', 'menu', 'delete', 'disabled']
@@ -27,14 +27,12 @@ export default function CommonComponents() {
     name2: 'data2' + index,
     name3: 'data3' + index,
   }))
+  const [paginationData] = useState(data)
+  const { pages, selectedPage, setSelectedPage } = usePagination(paginationData, 20)
 
   useEffect(() => {
     setTimeout(() => setIsLoading(false), 3000)
   }, [])
-
-  const handleSelectedPage = (page: number) => {
-    setSelectedPage(page)
-  }
 
   return (
     <div className='items-strech mt-8 flex w-full flex-wrap justify-between gap-8'>
@@ -180,52 +178,46 @@ export default function CommonComponents() {
         <div className='my-12 flex w-full flex-col items-center justify-center'>
           <Pagination
             className='my-4'
-            data={data}
-            itemsPerPage={20}
+            pages={pages}
             size='sm'
             selectedPage={selectedPage}
-            setPage={handleSelectedPage}
+            setSelectedPage={(page) => setSelectedPage(page)}
           />
           <Pagination
             className='my-4'
-            data={data}
-            itemsPerPage={20}
+            pages={pages}
             style='secondary'
             size='sm'
             selectedPage={selectedPage}
-            setPage={handleSelectedPage}
+            setSelectedPage={(page) => setSelectedPage(page)}
           />
           <Pagination
             className='my-4'
-            data={data}
-            itemsPerPage={20}
+            pages={pages}
             selectedPage={selectedPage}
-            setPage={handleSelectedPage}
+            setSelectedPage={(page) => setSelectedPage(page)}
           />
           <Pagination
             className='my-4'
-            data={data}
-            itemsPerPage={20}
+            pages={pages}
             style='secondary'
             selectedPage={selectedPage}
-            setPage={handleSelectedPage}
+            setSelectedPage={(page) => setSelectedPage(page)}
           />
           <Pagination
             className='my-4'
-            data={data}
-            itemsPerPage={20}
+            pages={pages}
             size='lg'
             selectedPage={selectedPage}
-            setPage={handleSelectedPage}
+            setSelectedPage={(page) => setSelectedPage(page)}
           />
           <Pagination
             className='my-4'
-            data={data}
-            itemsPerPage={20}
+            pages={pages}
             size='lg'
             style='secondary'
             selectedPage={selectedPage}
-            setPage={handleSelectedPage}
+            setSelectedPage={(page) => setSelectedPage(page)}
           />
         </div>
       </Section>

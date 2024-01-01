@@ -44,7 +44,7 @@ export default function TableHeader({
   return (
     <thead>
       <tr className='relative'>
-        {multiselect && (
+        {multiselect ? (
           <Th
             name={name}
             column={columns[0]}
@@ -56,7 +56,7 @@ export default function TableHeader({
             haveSubColumns={haveSubColumns}
             handleAll={handleAll}
           />
-        )}
+        ) : null}
         {columns.map((col) => (
           <Th
             key={col.label}
@@ -71,7 +71,7 @@ export default function TableHeader({
           />
         ))}
       </tr>
-      {haveSubColumns && (
+      {haveSubColumns ? (
         <tr className='relative'>
           {mergedSubColumns.map((col) => (
             <Th
@@ -85,7 +85,7 @@ export default function TableHeader({
             />
           ))}
         </tr>
-      )}
+      ) : null}
     </thead>
   )
 }

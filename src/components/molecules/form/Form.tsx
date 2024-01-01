@@ -43,8 +43,8 @@ export default function Form({
   })
 
   const formStyle = {
-    primary: 'border border-border bg-primary-500 text-primary-text shadow-button ',
-    secondary: 'border border-border bg-secondary-500 text-secondary-text shadow-button ',
+    primary: 'text-primary-text',
+    secondary: 'text-secondary-text',
     none: '',
   }
   return (
@@ -56,31 +56,29 @@ export default function Form({
           role={role}
         >
           {children}
-          {!hideError && (
+          {!hideError ? (
             <div className='my-2 flex h-6 w-full items-center justify-center'>
               <Error size={size} error={error} />
               <Error type='success' size={size} error={success ? success.message : undefined} />
             </div>
-          )}
+          ) : null}
           <div className='flex items-center justify-center'>
             {success ? (
               <Button className='mb-4' size={size} onClick={success.onSuccess}>
                 {success.label}
               </Button>
-            ) : (
-              submit && (
-                <Button
-                  className='Submit mb-4'
-                  type='submit'
-                  style={style}
-                  size={size}
-                  isLoading={isLoading}
-                  disabled={disabled}
-                >
-                  {submit}
-                </Button>
-              )
-            )}
+            ) : submit ? (
+              <Button
+                className='Submit mb-4'
+                type='submit'
+                style={style}
+                size={size}
+                isLoading={isLoading}
+                disabled={disabled}
+              >
+                {submit}
+              </Button>
+            ) : null}
           </div>
         </form>
       </FormProvider>

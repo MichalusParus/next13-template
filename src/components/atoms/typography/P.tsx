@@ -38,7 +38,7 @@ export default function P({
   }
 
   return (
-    <p className={`${className} ${pStyle[style]} ${pSize[size]} ${align}`}>
+    <p className={`${className} whitespace-pre-wrap ${pStyle[style]} ${pSize[size]} ${align}`}>
       {isLoading
         ? new Array(expectedLines)
             .fill(null)

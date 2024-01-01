@@ -69,7 +69,7 @@ export const TextArea = forwardRef(
         hideError={hideError}
       >
         <textarea
-          className={`w-full transition-activity placeholder:text-placeholder focus:outline-none ${
+          className={`w-full font-semibold transition-activity placeholder:text-placeholder focus:outline-none ${
             hideError ? '' : 'mb-1'
           } ${textAreaStyle[style]} ${error ? 'error' : ''} ${errorStyle} ${textAreaSize[size]}`}
           id={name}

@@ -40,13 +40,15 @@ export const Input = forwardRef(
         'hover:bg-primary-700 hover:text-primary-textHover hover:shadow-active ' +
         'active:bg-primary-300 active:text-primary-textActive active:shadow-active ' +
         'focus-visible:bg-primary-300 focus-visible:text-primary-textActive focus-visible:shadow-active ' +
-        'disabled:border-zinc-800 disabled:bg-zinc-400 disabled:text-zinc-800 disabled:shadow-none disabled:cursor-not-allowed ',
+        'disabled:border-zinc-800 disabled:bg-zinc-400 disabled:text-zinc-800 disabled:shadow-none disabled:cursor-not-allowed ' +
+        'autofill:transition-colors autofill:duration-[1000s] autofill:shadow-active ',
       secondary:
         'border border-border bg-secondary-500 text-secondary-text shadow-active ' +
         'hover:bg-secondary-700 hover:text-secondary-textHover hover:shadow-active ' +
         'active:bg-secondary-300 active:text-secondary-textActive active:shadow-active ' +
         'focus-visible:bg-secondary-300 focus-visible:text-secondary-textActive focus-visible:shadow-active ' +
-        'disabled:border-zinc-800 disabled:bg-zinc-400 disabled:text-zinc-800 disabled:shadow-none disabled:cursor-not-allowed ',
+        'disabled:border-zinc-800 disabled:bg-zinc-400 disabled:text-zinc-800 disabled:shadow-none disabled:cursor-not-allowed ' +
+        'autofill:transition-colors autofill:duration-[1000s] autofill:shadow-active ',
       none: '',
     }
     const errorStyle =
@@ -71,7 +73,7 @@ export const Input = forwardRef(
         hideError={hideError}
       >
         <input
-          className={`w-full transition-activity placeholder:text-placeholder focus:outline-none ${
+          className={`w-full font-semibold transition-activity placeholder:text-placeholder focus:outline-none ${
             hideError ? '' : 'mb-1'
           } ${inputStyle[style]} ${error ? 'error' : ''} ${errorStyle} ${inputSize[size]}`}
           id={name}

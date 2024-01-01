@@ -41,17 +41,17 @@ export default function Modal({
         role='dialog'
       >
         <div className={`ModalInnerWrap ${className} relative w-full rounded-xl ${modalStyle[style]}`}>
-          {title && (
+          {title ? (
             <Title
-              className='absolute left-0 top-0 my-2 w-full text-center'
+              className='absolute left-0 top-0 my-2 w-full pr-10 text-center'
               type='h4'
               style={style === 'secondary' ? 'secondary' : 'primary'}
               size='xl'
             >
               {title}
             </Title>
-          )}
-          {onClose && (
+          ) : null}
+          {onClose ? (
             <Button
               className='absolute right-[6px] top-[6px]'
               style='none'
@@ -59,11 +59,11 @@ export default function Modal({
               icon={<XIcon />}
               onClick={onClose}
             />
-          )}
+          ) : null}
           <div className={`ModalContentWrap mt-12 max-h-[80vh] overflow-y-auto ${padding}`}>{children}</div>
         </div>
       </div>
-      {onClose && <Overlay isOpen={isOpen} onClick={onClose} dark />}
+      {onClose ? <Overlay isOpen={isOpen} onClick={onClose} dark /> : null}
     </>
   )
 }

@@ -6,7 +6,7 @@ import Dropdown from './Dropdown'
 
 type Props = {
   className?: string
-  tabs: { label: string; slug: string; component: React.ReactNode }[]
+  tabs: { label: string; slug: string; component: React.ReactNode; isHidden?: boolean }[]
   style?: 'primary' | 'secondary' | 'none'
   children?: React.ReactNode | React.ReactNode[]
 }
@@ -29,18 +29,20 @@ export default function Tabs({ className = '', tabs, style = 'primary', children
   return (
     <div className={`TabsWrap ${className} relative w-full`}>
       <ul className={`hidden w-full overflow-hidden rounded-md md:flex ${tabsStyle[style]}`} role='tablist'>
-        {tabs.map((tab) => (
-          <li className='w-full' key={tab.slug} role='tab'>
-            <NextLink
-              className={`${tab.slug === selectedTab.slug ? 'selected' : ''}`}
-              style='menu'
-              size='lg'
-              href={`?tab=${tab.slug}`}
-            >
-              {tab.label}
-            </NextLink>
-          </li>
-        ))}
+        {tabs.map((tab) =>
+          !tab.isHidden ? (
+            <li className='w-full' key={tab.slug} role='tab'>
+              <NextLink
+                className={`${tab.slug === selectedTab.slug ? 'selected' : ''}`}
+                style='menu'
+                size='lg'
+                href={`?tab=${tab.slug}`}
+              >
+                {tab.label}
+              </NextLink>
+            </li>
+          ) : null
+        )}
         {children}
       </ul>
       <Dropdown
