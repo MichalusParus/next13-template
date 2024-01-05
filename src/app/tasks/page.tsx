@@ -1,7 +1,13 @@
-import { createTask, deleteTask, getTasks, updateTask } from './utils/actions'
-import TasksGrid from './components/TaskGrid'
+import { createTask, deleteTask, getTasks, updateTask } from './_utils/actions'
+import { Metadata } from 'next'
+import TasksGrid from './_components/TaskGrid'
 import Tabs from '@/src/components/molecules/popover/Tabs'
-import TaskForm from './components/TaskForm'
+import TaskForm from './_components/TaskForm'
+
+export const metadata: Metadata = {
+  title: 'Tasks || Next 13 Template',
+  description: 'Next 13 Template with tailwindCSS',
+}
 
 export default async function TasksPage() {
   const data = await getTasks()

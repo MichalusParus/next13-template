@@ -1,15 +1,13 @@
+import { useSession } from 'next-auth/react'
 import ProfileIcon from '../icons/ProfileIcon'
-import NextImage from './NextImage'
 
 type Props = {
   className?: string
-  userName?: string
   size?: 'sm' | 'md' | 'lg' | 'none'
-  src?: string
 }
 
-export default function Avatar({ className, userName, size = 'md', src }: Props) {
-  const userInitials = userName?.split(' ').map((name) => name.slice(0, 1).toUpperCase())
+export default function Avatar({ className, size = 'md' }: Props) {
+  const { data: session } = useSession()
 
   const avatarStyle = 'border-2 border-secondary-text bg-secondary-500 text-secondary-text'
   const avatarSize = {
@@ -19,7 +17,7 @@ export default function Avatar({ className, userName, size = 'md', src }: Props)
     none: '',
   }
 
-  if (!userName && !src) {
+  if (!session) {
     return (
       <div
         className={`AvatarWrap ${className} relative flex items-center justify-center rounded-full ${avatarStyle} ${avatarSize[size]}`}
@@ -29,11 +27,13 @@ export default function Avatar({ className, userName, size = 'md', src }: Props)
     )
   }
 
+  const userInitials = session.user?.name?.split(' ').map((name) => name.slice(0, 1).toUpperCase())
+
   return (
     <div
       className={`AvatarWrap ${className} relative flex items-center justify-center rounded-full ${avatarStyle} ${avatarSize[size]}`}
     >
-      {src ? <NextImage src={src} alt='profil' ratio={100} width={'100%'} /> : userInitials}
+      {userInitials}
     </div>
   )
 }

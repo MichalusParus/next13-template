@@ -6,5 +6,5 @@ export const metadata: Metadata = {
 }
 
 export default function NotFound() {
-  return <div className=''>OOPs, bad redirect, not found</div>
+  return <div className='NotFoundWrap'>OOPs, bad redirect, not found</div>
 }

@@ -83,7 +83,7 @@ export default function CommonComponents() {
       <Section title='Links' type='center' className=' w-full'>
         <div className='mt-4 flex flex-wrap justify-center'>
           {linkVariants.map((style) => (
-            <div key={style} className='mx-8 mb-12 flex flex-col items-center justify-between'>
+            <div key={style} className='mb-12 flex flex-col items-center justify-between'>
               <div className='flex w-full items-center justify-around'>
                 {sizes.map(({ size }) => (
                   <Tooltip key={`${size} icon`} title={`${style} ${size}`}>
@@ -153,15 +153,7 @@ export default function CommonComponents() {
 
       <Section className='w-full md:w-[47%]' type='center' title={'Avatar'}>
         <div className='my-12 flex w-full justify-around'>
-          <Tooltip title='Unloged md'>
-            <Avatar />
-          </Tooltip>
-          <Tooltip title='UserName md'>
-            <Avatar userName='Michal Sikora' />
-          </Tooltip>
-          <Tooltip title='ProfileIco md'>
-            <Avatar src='/favicon.ico' />
-          </Tooltip>
+          <Avatar />
         </div>
       </Section>
 

@@ -1,18 +1,24 @@
-import mongoose from 'mongoose'
+import { MongoClient } from 'mongodb'
 
-export const connect = async () => {
-  try {
-    mongoose.connect(process.env.MONGODB_URI!)
-    const connection = mongoose.connection
-    connection.on('connected', () => {
-      console.log('MongoDB connected successfully!')
-    })
-    connection.on('error', (error) => {
-      console.log('MongoDB connection error' + error)
-      process.exit()
-    })
-  } catch (error) {
-    console.log('Something went wrong!')
-    console.log(error)
-  }
+if (!process.env.MONGODB_URI) {
+  throw new Error('Invalid/Missing environment variable: "MONGODB_URI"')
 }
+
+const uri = process.env.MONGODB_URI
+const options = {}
+
+let client
+let clientPromise: Promise<MongoClient>
+
+if (process.env.NODE_ENV === 'development') {
+  if (!global._mongoClientPromise) {
+    client = new MongoClient(uri, options)
+    global._mongoClientPromise = client.connect()
+  }
+  clientPromise = global._mongoClientPromise
+} else {
+  client = new MongoClient(uri, options)
+  clientPromise = client.connect()
+}
+
+export default clientPromise

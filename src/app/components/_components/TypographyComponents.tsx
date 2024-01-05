@@ -76,32 +76,34 @@ export default function TypographyComponents() {
           />
         </Dropdown>
       </div>
-      <div className='flex flex-wrap items-start justify-center'>
-        {align.map((a) => (
-          <div className='m-4 block w-full max-w-[24rem]' key={a}>
-            <Title
-              align={a}
-              type={titleType[size] as 'h4' | 'h5' | 'h6'}
-              style={style}
-              size={size}
-              isLoading={isLoading}
-            >
-              {`Title for ${size} paragraphs`}
-            </Title>
-            <P align={a} style={style} size={size} isLoading={isLoading} expectedLines={10}>
-              {`This is ${size} sized paragraph. Left aligned paragraph. This is ${size} sized paragraph. Left aligned paragraph. `}
-              <Span type='bold' size={size}>{`Random ${size} bold span.`}</Span>
-              {` This is ${size} sized paragraph. Left aligned paragraph. This is ${size} sized paragraph. Left aligned paragraph. Left aligned paragraph. `}
-              <Span type='underline' size={size}>{`Random ${size} underline span.`}</Span>
-              {` This is ${size} sized paragraph. Left aligned paragraph. This is ${size} sized paragraph. Left aligned paragraph. Left aligned paragraph. `}
-              <Span type='italic' size={size}>{`Random ${size} italic span.`}</Span>
-            </P>
-          </div>
-        ))}
+      <div>
+        <div className='flex min-w-full flex-col items-center lg:flex-row'>
+          {align.map((a) => (
+            <div className='m-4 max-w-[24rem]' key={a}>
+              <Title
+                align={a}
+                type={titleType[size] as 'h4' | 'h5' | 'h6'}
+                style={style}
+                size={size}
+                isLoading={isLoading}
+              >
+                {`Title for ${size} paragraphs`}
+              </Title>
+              <P align={a} style={style} size={size} isLoading={isLoading} expectedLines={10}>
+                {`This is ${size} sized paragraph. ${a} aligned paragraph. This is ${size} sized paragraph. ${a} aligned paragraph. `}
+                <Span type='bold' size={size}>{`Random bold span.`}</Span>
+                {` This is ${size} sized paragraph. ${a} aligned paragraph. This is ${size} sized paragraph. ${a} aligned paragraph. ${a} aligned paragraph. `}
+                <Span type='underline' size={size}>{`Random underline span.`}</Span>
+                {` This is ${size} sized paragraph. ${a} aligned paragraph. This is ${size} sized paragraph. ${a} aligned paragraph. ${a} aligned paragraph. `}
+                <Span type='italic' size={size}>{`Random italic span.`}</Span>
+              </P>
+            </div>
+          ))}
+        </div>
 
-        <div className='flex w-full flex-wrap'>
+        <div className='flex flex-col lg:flex-row'>
           {ulListType.map((typ) => (
-            <div key={typ} className='m-4 w-full max-w-[24rem]'>
+            <div key={typ} className='m-4 max-w-[24rem]'>
               <List
                 type='ul'
                 liType={typ}
@@ -116,7 +118,7 @@ export default function TypographyComponents() {
             </div>
           ))}
         </div>
-        <div className='flex w-full flex-wrap'>
+        <div className='flex flex-col lg:flex-row'>
           {olListType.map((typ) => (
             <div key={typ} className='m-4 w-full max-w-[24rem]'>
               <List

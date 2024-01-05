@@ -2,18 +2,21 @@
 import { useCallback } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { navLinks } from '@/src/constants/routes'
+import { Session } from 'next-auth'
 import Button from '../../atoms/common/Button'
 import NextLink from '../../atoms/common/NextLink'
 
 type Props = {
   className?: string
   menu?: boolean
+  session?: Session
   onClick?: (value: boolean) => void
 }
 
-export default function NavBar({ className, menu, onClick = () => {} }: Props) {
+export default function NavBar({ className, menu, session, onClick = () => {} }: Props) {
   const pathName = usePathname()
   const router = useRouter()
+  const filteredNavLinks = session ? navLinks : navLinks.filter((link) => !link.private)
 
   const handleRefresh = useCallback(() => {
     onClick(false)
@@ -32,7 +35,7 @@ export default function NavBar({ className, menu, onClick = () => {} }: Props) {
   return (
     <nav className={className}>
       <ul className={menu ? 'flex flex-col' : 'flex pt-1'}>
-        {navLinks.map(({ slug, title }) => (
+        {filteredNavLinks.map(({ slug, title }) => (
           <li key={slug} className='flex justify-center' role={menu ? 'menuitem' : ''}>
             {pathName === slug && menu ? (
               <Button

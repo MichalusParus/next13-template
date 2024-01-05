@@ -1,10 +1,11 @@
 import Loader from '../components/atoms/common/Loader'
+import Section from '../components/atoms/common/Section'
 
 export default function Loading() {
   return (
-    <div className='mt-20 flex flex-col items-center'>
-      <Loader />
+    <Section className='min-h-[80vh]'>
+          <Loader className='mt-[20%]' />
       Loading
-    </div>
+  </Section>
   )
 }

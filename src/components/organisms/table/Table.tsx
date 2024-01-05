@@ -51,8 +51,8 @@ export default function Table({
 
   const handleSelect = useCallback(
     (row: RowDef) => {
-      if (selectedRows.length > 0 && selectedRows.map((r) => r.id).includes(row.id)) {
-        setSelectedRows(selectedRows.filter((rows) => rows.id !== row.id))
+      if (selectedRows.length > 0 && selectedRows.map((r) => r.id).includes(row._id)) {
+        setSelectedRows(selectedRows.filter((rows) => rows.id !== row._id))
       } else {
         setSelectedRows([...selectedRows, row])
       }
@@ -88,7 +88,7 @@ export default function Table({
     const handleClick = (e: any) => {
       if (e.keyCode === 32 && e.target.parentElement.id === `tbody-${name}`) {
         e.preventDefault()
-        handleOnRowClick(rows.find((row) => row.id === e.target.id)!)
+        handleOnRowClick(rows.find((row) => row._id === e.target.id)!)
       }
     }
     window.addEventListener('keydown', handleClick)
@@ -110,7 +110,9 @@ export default function Table({
 
   return (
     <div
-      className={`TableWrap ${className} max-w-[92vw] overflow-auto rounded-md border-2 shadow-button ${maxHeight} ${tableStyle[style]} `}
+      className={`TableWrap ${className} max-w-[92vw] overflow-auto rounded-md border-2 shadow-button ${
+        multiselect ? 'mb-16' : ''
+      } ${maxHeight} ${tableStyle[style]} `}
     >
       <table className={`overflow-hidden rounded-md border`}>
         <TableHeader
@@ -149,7 +151,7 @@ export default function Table({
       </table>
       {multiselect ? (
         <Button
-          className={`absolute right-0 ${submitPosition[size]}`}
+          className={`absolute bottom-0 right-0 ${submitPosition[size]}`}
           style={style}
           size={size}
           onClick={() => multiselect.handleMultiselect(selectedRows)}

@@ -1,8 +1,8 @@
-import { connect } from '@/src/libs/mongodb'
+import { connect } from '@/src/libs/mongoose'
 import { TaskType } from './types'
 import Task from '@/src/models/task'
 
-export const getTasks = async () => {
+export const getTasks = async (): Promise<any> => {
   'use server'
   try {
     connect()
@@ -13,7 +13,7 @@ export const getTasks = async () => {
   }
 }
 
-export const createTask = async (task: TaskType) => {
+export const createTask = async (task: TaskType): Promise<any> => {
   'use server'
   try {
     connect()
@@ -25,7 +25,7 @@ export const createTask = async (task: TaskType) => {
   }
 }
 
-export const updateTask = async (task: TaskType) => {
+export const updateTask = async (task: TaskType): Promise<any> => {
   'use server'
   try {
     connect()
@@ -37,7 +37,7 @@ export const updateTask = async (task: TaskType) => {
   }
 }
 
-export const deleteTask = async (id: string) => {
+export const deleteTask = async (id: string): Promise<any> => {
   'use server'
   try {
     connect()

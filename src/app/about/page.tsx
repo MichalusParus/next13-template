@@ -17,7 +17,7 @@ export default function AboutPage() {
           <Title type='h5' size='md'>
             Setup
           </Title>
-          <P>Project is build by Next 13 in typescript with basic lint and prettier setup</P>
+          <P>Project is build by Next 13 with typescript with basic lint and prettier setup</P>
         </div>
         <div className='my-4 w-full'>
           <Title type='h5' size='md'>
@@ -33,14 +33,24 @@ export default function AboutPage() {
             Backend
           </Title>
           <P>
-            Currently is MongoDB connected through Mongoose, connect fn is located in libs folder and mongoose models in
+            Currently is MongoDB connected through Mongoose, connect() is located in libs folder and mongoose models in
             models folder. Currently without api, data is fetched directly from DB through Server Actions. Loading,
             errors and refresh is handled by useServerAction hook. Actions are stored inside page folder under utils
-            folder.{' '}
+            folder.
+          </P>
+        </div>
+        <div className='my-4 w-full'>
+          <Title type='h5' size='md'>
+            Auth
+          </Title>
+          <P>
+            Authentication and authorization is handled by Next Auth Credencials. Because Next Auth doesnt support
+            mongoose, there is separate mongoDb connection under libs folder. User information after log in are stored
+            inside JWT token and pass to session. For private path protection there is basic middleware.
           </P>
         </div>
       </Section>
-      <Section type='center' className='w-full md:w-[20rem]' title='Commits'>
+      <Section type='center' className='w-full md:w-[25rem]' title='Commits'>
         <div className='w-full'>
           <List
             className='mb-6'
@@ -56,12 +66,6 @@ export default function AboutPage() {
           />
           <List
             className='mb-6'
-            title='#2.1/components update'
-            liType='list-[circle]'
-            content={['tabs reworked', 'components roles', 'SearchBar', 'componentsPage update']}
-          />
-          <List
-            className='mb-6'
             title='#3/mongoDB CRUD'
             liType='list-[circle]'
             content={[
@@ -70,6 +74,18 @@ export default function AboutPage() {
               'ServerActions, connection hook, validation',
               'routes enum',
               'minor component fixes',
+            ]}
+          />
+          <List
+            className='mb-6'
+            title='#4/Next Auth'
+            liType='list-[circle]'
+            content={[
+              'Next Auth,separate mongoDB setup',
+              'Login & Signup pages',
+              'Profile & Admin pages',
+              'User model & actions',
+              'Middleware',
             ]}
           />
         </div>

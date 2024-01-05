@@ -12,7 +12,7 @@ export type ColumnsDef = {
 }
 
 export type RowDef = {
-  id: string
+  _id: string
 }
 
 export type SortingDef = { value: string; type: 'asc' | 'dec' | 'none' }

@@ -1,4 +1,4 @@
-import { TaskType } from '../utils/types'
+import { TaskType } from '../_utils/types'
 import P from '@/src/components/atoms/typography/P'
 import Span from '@/src/components/atoms/typography/Span'
 import TaskHeader from './TaskHeader'
@@ -7,8 +7,8 @@ import Title from '@/src/components/atoms/typography/Title'
 type Props = {
   task: TaskType
   setIsDetailOpen: (value: boolean) => void
-  updateTask: (task: TaskType) => Promise<{ _id: string }>
-  deleteTask: (id: string) => Promise<{ _id: string }>
+  updateTask: (task: TaskType) => Promise<TaskType>
+  deleteTask: (id: string) => Promise<TaskType>
 }
 
 export default function TaskDetail({ task, setIsDetailOpen, updateTask, deleteTask }: Props) {

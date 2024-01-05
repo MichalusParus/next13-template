@@ -5,6 +5,7 @@ export type TaskType = {
   comments: string
   status: 'in-progress' | 'to-do' | 'completed' | 'backlog'
   createdAt: Date
+  updatedAt: Date
   startedAt: Date
   completedAt: Date
 }

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
 
-export const useServerAction = <P, R>(action: (value: P) => Promise<R & { _id: string }>) => {
+export const useServerAction = <P, R>(action: (value: P) => Promise<R>) => {
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
   const [isSuccess, setIsSuccess] = useState(false)

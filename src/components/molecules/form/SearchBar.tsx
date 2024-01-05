@@ -38,8 +38,7 @@ export default function SearchBar({ className = '', placeholder = '', onSubmit }
       onSubmit={handleOnSubmit}
     >
       <FormInput
-        className={``}
-        name='searchItem'
+        name={'searchItem'}
         label='search'
         type='search'
         style='secondary'
@@ -48,7 +47,6 @@ export default function SearchBar({ className = '', placeholder = '', onSubmit }
         hideLabel
         hideError
         required
-        role='searchbox'
       />
       <Button className='absolute right-0' type='submit' size='sm' icon={<SearchIcon />} />
     </Form>

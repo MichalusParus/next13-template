@@ -1,20 +1,52 @@
-This is a Next.js 13 Template project bootstrapped with create-next-app with Typescript, TailwindCSS and ParusComponents.
+# Next13 Template
 
-## Getting Started
+App Template build with Next13, TS, Tailwind, Mongoose, NextAuth
 
-Clone this repo, change name and choose your theme
-Run the development server:
+## Demo link:
 
-```bash
-npm run dev
-```
+Access my site at [futureProd.com](https://futureProd.com)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Table of Content:
 
-Other comands: Build,Start,Format
+- [Technologies and Libraries](#technologiesandlibraries)
+- [Setup](#setup)
+- [Credits](#credits)
+- [License](#license)
 
-```bash
-npm run build
-npm run start
-npm run format
-```
+## Technologies and libraries
+
+Main: `Next 13`, `Typescript`
+Frontend: `TailwindCSS`,`Yup`,`React Hook Form`
+Backend: `MongoDB`,`Mongoose`
+Auth: `Next Auth`,`bcrypt`
+dev: `Prettier`, `Lint`
+
+## Setup
+
+- download or clone the repository
+
+- run `npm install` for installing dependencies
+
+- create .env file with your MONGODB_URI and NEXTAUTH_SECRET
+
+- run `npm run dev` for start dev
+
+- Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+Other scripts
+
+- run `npm run start` for start prod
+
+- run `npm run build` for building app
+
+- run `npm run format` for prettier --watch
+
+- run `npm run format` for prettier --watch
+
+## Credits
+
+- [MichalusParus](github.com/MichalusParus)
+
+## License
+
+MIT license @[MichalusParus](github.com/MichalusParus)

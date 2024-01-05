@@ -8,6 +8,7 @@ import DeleteIcon from '@/src/components/atoms/icons/DeleteIcon'
 import EditIcon from '@/src/components/atoms/icons/EditIcon'
 import ErrorIcon from '@/src/components/atoms/icons/ErrorIcon'
 import FilterIcon from '@/src/components/atoms/icons/FilterIcon'
+import LockIcon from '@/src/components/atoms/icons/LockIcon'
 import ProfileIcon from '@/src/components/atoms/icons/ProfileIcon'
 import RefreshIcon from '@/src/components/atoms/icons/RefreshIcon'
 import SearchIcon from '@/src/components/atoms/icons/SearchIcon'
@@ -18,7 +19,7 @@ import XIcon from '@/src/components/atoms/icons/XIcon'
 
 export default function IconComponents() {
   return (
-    <Section className='mt-8 w-full' type='center' title='Icons'>
+    <Section className='mt-8 min-h-[70vh] w-full' type='center' title='Icons'>
       <div className='my-12 flex h-full flex-wrap justify-center gap-4'>
         <Tooltip title='ChevronIconv'>
           <Button style='primary' size='lg' icon={<ChevronIcon />}></Button>
@@ -58,6 +59,9 @@ export default function IconComponents() {
         </Tooltip>
         <Tooltip title='RefreshIcon'>
           <Button style='primary' size='lg' icon={<RefreshIcon />}></Button>
+        </Tooltip>
+        <Tooltip title='LockIcon'>
+          <Button style='primary' size='lg' icon={<LockIcon />}></Button>
         </Tooltip>
       </div>
     </Section>

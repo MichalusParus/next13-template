@@ -1,5 +1,5 @@
 'use client'
-import { TaskType } from '../utils/types'
+import { TaskType } from '../_utils/types'
 import Title from '@/src/components/atoms/typography/Title'
 import Error from '@/src/components/molecules/form/Error'
 import P from '@/src/components/atoms/typography/P'

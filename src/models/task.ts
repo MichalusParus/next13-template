@@ -18,9 +18,8 @@ const taskSchema = new Schema(
       default: 'in-progress',
       required: true,
     },
-    created: String,
-    startedAt: String,
-    completedAt: String,
+    startedAt: Date,
+    completedAt: Date,
   },
   { timestamps: true }
 )

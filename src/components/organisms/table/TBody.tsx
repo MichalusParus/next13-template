@@ -33,7 +33,7 @@ export default function TBody({
 
   const selectedClass = useCallback(
     (rowId: string) => {
-      return selectedRows.map((r) => r.id).includes(rowId) ? 'selected' : ''
+      return selectedRows.map((r) => r._id).includes(rowId) ? 'selected' : ''
     },
     [selectedRows]
   )
@@ -76,30 +76,30 @@ export default function TBody({
       {pagedData.length > 0 ? (
         pagedData.map((row) => (
           <tr
-            key={row.id}
-            id={row.id}
-            className={`group focus:outline-none ${selectedClass(row.id)} ${rowStyle[style]} ${
+            key={row._id}
+            id={row._id}
+            className={`group focus:outline-none ${selectedClass(row._id)} ${rowStyle[style]} ${
               isRowInteractive ? `cursor-pointer ${rowInteractiveStyle[style]}` : 'cursor-default'
             }`}
             onClick={() => handleOnRowClick(row)}
             tabIndex={isRowInteractive ? 0 : -1}
           >
             {multiselect ? (
-              <td className={`${selectedClass(row.id)} ${checkboxSize[size]}`}>
+              <td className={`${selectedClass(row._id)} ${checkboxSize[size]}`}>
                 <Checkbox
                   type='fake'
                   style={style}
-                  name={row.id}
-                  label={row.id}
-                  value={selectedRows.map((row) => row.id)}
-                  options={[{ value: row.id, label: '' }]}
+                  name={row._id}
+                  label={row._id}
+                  value={selectedRows.map((row) => row._id)}
+                  options={[{ value: row._id, label: '' }]}
                   size={size}
                   onChange={() => {}}
                 />
               </td>
             ) : null}
             {columnsInRow.map((col) => (
-              <td key={row.id + col!.name} className={`${selectedClass(row.id)} ${tdSize[size]}`}>
+              <td key={row._id + col!.name} className={`${selectedClass(row._id)} ${tdSize[size]}`}>
                 {/* @ts-expect-error */}
                 {row[col!.name]}
               </td>

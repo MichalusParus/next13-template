@@ -48,7 +48,7 @@ export const Input = forwardRef(
         'active:bg-secondary-300 active:text-secondary-textActive active:shadow-active ' +
         'focus-visible:bg-secondary-300 focus-visible:text-secondary-textActive focus-visible:shadow-active ' +
         'disabled:border-zinc-800 disabled:bg-zinc-400 disabled:text-zinc-800 disabled:shadow-none disabled:cursor-not-allowed ' +
-        'autofill:transition-colors autofill:duration-[1000s] autofill:shadow-active ',
+        'autofill:transition-colors autofill:duration-[1000s] autofill:shadow-active',
       none: '',
     }
     const errorStyle =

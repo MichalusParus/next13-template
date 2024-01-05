@@ -1,9 +1,9 @@
 'use client'
 import { useState } from 'react'
-import { TaskType } from '../utils/types'
+import { TaskType } from '../_utils/types'
 import { useServerAction } from '@/src/utils/hooks/useServerAction'
 import { useRouter } from 'next/navigation'
-import { routes } from '@/src/constants/routes'
+import { privateRoutes } from '@/src/constants/routes'
 import Button from '@/src/components/atoms/common/Button'
 import CheckIcon from '@/src/components/atoms/icons/CheckIcon'
 import DeleteIcon from '@/src/components/atoms/icons/DeleteIcon'
@@ -18,8 +18,8 @@ import Tooltip from '@/src/components/atoms/common/Tooltip'
 type Props = {
   task: TaskType
   setIsDetailOpen: (value: boolean) => void
-  updateTask: (task: TaskType) => Promise<{ _id: string }>
-  deleteTask: (_id: string) => Promise<{ _id: string }>
+  updateTask: (task: TaskType) => Promise<TaskType>
+  deleteTask: (_id: string) => Promise<TaskType>
 }
 
 export default function TaskHeader({ task, setIsDetailOpen, updateTask, deleteTask }: Props) {
@@ -36,7 +36,7 @@ export default function TaskHeader({ task, setIsDetailOpen, updateTask, deleteTa
       status: 'to-do' as 'to-do',
     }
     update(movedTask)
-    router.push(`${routes.tasks}?tab=to-do`)
+    router.push(`${privateRoutes.tasks}?tab=to-do`)
   }
 
   const handleStart = () => {
@@ -46,7 +46,7 @@ export default function TaskHeader({ task, setIsDetailOpen, updateTask, deleteTa
       startedAt: new Date(),
     }
     update(startedTask)
-    router.push(`${routes.tasks}?tab=in-progress`)
+    router.push(`${privateRoutes.tasks}?tab=in-progress`)
   }
 
   const handleComplete = () => {
@@ -56,13 +56,13 @@ export default function TaskHeader({ task, setIsDetailOpen, updateTask, deleteTa
       completedAt: new Date(),
     }
     update(completedTask)
-    router.push(`${routes.tasks}?tab=completed`)
+    router.push(`${privateRoutes.tasks}?tab=completed`)
   }
 
   const handleDelete = () => {
     remove(task._id)
     setIsDetailOpen(false)
-    router.push(`${routes.tasks}?tab=${task.status}`)
+    router.push(`${privateRoutes.tasks}?tab=${task.status}`)
   }
 
   return (
@@ -104,7 +104,7 @@ export default function TaskHeader({ task, setIsDetailOpen, updateTask, deleteTa
             style='secondary'
             className='mx-4'
             icon={<EditIcon />}
-            href={`${routes.tasks}?tab=form&id=${task._id}`}
+            href={`${privateRoutes.tasks}?tab=form&id=${task._id}`}
           />
         </Tooltip>
         <Tooltip title='Delete'>

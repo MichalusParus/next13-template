@@ -1,13 +1,19 @@
 export enum routes {
   home = '/',
   about = '/about',
-  components = '/components',
-  tasks = '/tasks',
+  login = '/user/login',
+  signup = '/user/sign-up',
 }
 
-export enum privateRoutes {}
+export enum privateRoutes {
+  components = '/components',
+  tasks = '/tasks',
+  profile = '/user/profile',
+}
 
-export enum adminRoutes {}
+export enum adminRoutes {
+  admin = '/user/admin',
+}
 
 export const navLinks = [
   {
@@ -19,11 +25,13 @@ export const navLinks = [
     title: 'About',
   },
   {
-    slug: routes.components,
+    slug: privateRoutes.components,
     title: 'Components',
+    private: true,
   },
   {
-    slug: routes.tasks,
+    slug: privateRoutes.tasks,
     title: 'Tasks',
+    private: true,
   },
 ]

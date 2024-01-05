@@ -64,12 +64,12 @@ export default function Form({
           ) : null}
           <div className='flex items-center justify-center'>
             {success ? (
-              <Button className='mb-4' size={size} onClick={success.onSuccess}>
+              <Button size={size} onClick={success.onSuccess}>
                 {success.label}
               </Button>
             ) : submit ? (
               <Button
-                className='Submit mb-4'
+                className='Submit'
                 type='submit'
                 style={style}
                 size={size}

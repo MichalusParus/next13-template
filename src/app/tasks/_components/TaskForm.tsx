@@ -2,10 +2,10 @@
 import { useRef } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { object, string } from 'yup'
-import { TaskType } from '../utils/types'
+import { TaskType } from '../_utils/types'
 import { getSelectOptions } from '@/src/utils/utils'
 import { useServerAction } from '@/src/utils/hooks/useServerAction'
-import { routes } from '@/src/constants/routes'
+import { privateRoutes } from '@/src/constants/routes'
 import Form from '@/src/components/molecules/form/Form'
 import FormInput from '@/src/components/molecules/form/input/FormInput'
 import FormSelect from '@/src/components/molecules/form/select/FormSelect'
@@ -41,7 +41,7 @@ export default function TaskForm({ data, createTask, updateTask }: Props) {
     ? {
         label: 'Continue',
         message: editedTask ? 'Task was updated' : 'Task was added',
-        onSuccess: () => push(`${routes.tasks}?tab=${newTaskStatus.current}`),
+        onSuccess: () => push(`${privateRoutes.tasks}?tab=${newTaskStatus.current}`),
       }
     : undefined
 
@@ -55,7 +55,6 @@ export default function TaskForm({ data, createTask, updateTask }: Props) {
       className='min-h-[70vh]'
       type='center'
       title={editedTask ? 'Edit Task Form' : 'New Task Form'}
-      padding='px-6 md:px-20'
     >
       <Form
         className='mt-8'

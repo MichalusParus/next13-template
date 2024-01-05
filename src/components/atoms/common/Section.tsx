@@ -14,7 +14,7 @@ export default function Section({
   type = 'center',
   style = 'main',
   title,
-  padding = 'pb-lgy px-lgx',
+  padding = 'py-3 px-6 md:py-6 md:px-12',
   children,
 }: Props) {
   const sectionType = {
@@ -31,7 +31,7 @@ export default function Section({
   return (
     <section className={`${className} ${sectionType[type]} ${sectionStyle[style]} ${padding}`}>
       {title ? (
-        <Title className={`my-4 ${sectionType[type]}`} type='h2' size='2xl'>
+        <Title className={`mb-8 ${sectionType[type]}`} type='h2' size='2xl'>
           {title}
         </Title>
       ) : null}

@@ -25,6 +25,10 @@
   background: rgba(0, 0, 0, 0.6);
 }
 
+input:-internal-autofill-selected {
+  font-size: 1rem !important;
+}
+
 /* Animations */
 
 @keyframes loaderAnim {

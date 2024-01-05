@@ -56,7 +56,7 @@ export default function TableComponents() {
     },
   ]
   const data = new Array(110).fill(null).map((data, index) => ({
-    id: 'data1' + index,
+    _id: 'data1' + index,
     name4: 'data1' + index,
     name5: 'data2' + index,
     name6: 'data3' + index,
@@ -145,7 +145,7 @@ export default function TableComponents() {
             />
           </Dropdown>
         </div>
-        <div className='flex flex-wrap items-start justify-between'>
+        <div className='relative flex flex-wrap items-start justify-between'>
           <Table
             name=''
             className='my-4'

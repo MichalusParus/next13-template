@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { TaskType } from '../utils/types'
+import { TaskType } from '../_utils/types'
 import { useSearchParams } from 'next/navigation'
 import { usePagination } from '@/src/utils/hooks/usePagination'
 import TaskTile from './TaskTile'
@@ -12,8 +12,8 @@ import TaskDetail from './TaskDetail'
 type Props = {
   data: TaskType[]
   selectedCategory: string
-  updateTask: (task: TaskType) => Promise<{ _id: string }>
-  deleteTask: (id: string) => Promise<{ _id: string }>
+  updateTask: (task: TaskType) => Promise<TaskType>
+  deleteTask: (id: string) => Promise<TaskType>
 }
 
 export default function TasksGrid({ data, selectedCategory, updateTask, deleteTask }: Props) {
