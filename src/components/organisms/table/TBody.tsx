@@ -2,6 +2,7 @@ import { useCallback } from 'react'
 import { Checkbox } from '../../molecules/form/checkbox/Checkbox'
 import { ColumnsDef, RowDef } from './types'
 import Title from '../../atoms/typography/Title'
+import { useTranslations } from 'next-intl'
 
 type Props = {
   name: string
@@ -26,6 +27,7 @@ export default function TBody({
   handleOnRowClick,
   onRowClick,
 }: Props) {
+  const t = useTranslations('common')
   const haveSubColumns = columns.some((col) => col.columns && col.columns.length > 0)
   const mergedSubColumns = columns.map((c) => c.columns).flat()
   const columnsInRow = haveSubColumns ? mergedSubColumns : columns
@@ -83,6 +85,8 @@ export default function TBody({
             }`}
             onClick={() => handleOnRowClick(row)}
             tabIndex={isRowInteractive ? 0 : -1}
+            role='button'
+            aria-pressed={selectedRows.some((row) => row._id)}
           >
             {multiselect ? (
               <td className={`${selectedClass(row._id)} ${checkboxSize[size]}`}>
@@ -99,7 +103,12 @@ export default function TBody({
               </td>
             ) : null}
             {columnsInRow.map((col) => (
-              <td key={row._id + col!.name} className={`${selectedClass(row._id)} ${tdSize[size]}`}>
+              <td
+                key={row._id + col!.name}
+                className={`${selectedClass(row._id)} ${tdSize[size]}`}
+                /* @ts-expect-error */
+                aria-label={`${col!.label}: ${row[col!.name]}`}
+              >
                 {/* @ts-expect-error */}
                 {row[col!.name]}
               </td>
@@ -110,7 +119,7 @@ export default function TBody({
         <tr>
           <td className={`${rowStyle[style]}`} colSpan={columnsInRow.length + (multiselect ? 1 : 0)}>
             <Title className='my-6 text-center' type='h4' style={style} size='lg'>
-              No results
+              {t('noResult')}
             </Title>
           </td>
         </tr>

@@ -2,7 +2,7 @@ import Error from './Error'
 
 export type Props = {
   className?: string
-  htmlFor?: string
+  name?: string
   label: string
   style?: 'primary' | 'secondary' | 'none'
   size?: 'sm' | 'md' | 'lg' | 'none'
@@ -14,7 +14,7 @@ export type Props = {
 }
 export const Label = ({
   className = '',
-  htmlFor,
+  name,
   label,
   style = 'primary',
   size = 'md',
@@ -35,8 +35,9 @@ export const Label = ({
   return (
     <div className={`${className} relative flex w-full flex-col md:flex-row ${hideError ? 'items-center' : 'mb-2'}`}>
       <label
+        id={`${name}-label`}
         className={`mb-1 mr-4 w-[50%] ${textColor} ${textSize[size]} ${hideLabel ? 'hidden' : ''}`}
-        htmlFor={htmlFor}
+        htmlFor={name}
       >
         {label}
       </label>

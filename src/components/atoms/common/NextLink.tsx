@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from '@/src/navigation'
 
 type Props = {
   className?: string
@@ -6,11 +6,24 @@ type Props = {
   style?: 'primary' | 'secondary' | 'menu' | 'inline' | 'none'
   size?: 'sm' | 'md' | 'lg' | 'none'
   icon?: React.ReactNode
+  tabIndex?: number
+  ariaLabel?: string
   children?: string | React.ReactNode
 }
 
-export default function NextLink({ className = '', href, style = 'primary', size = 'md', icon, children }: Props) {
+export default function NextLink({
+  className = '',
+  href,
+  style = 'primary',
+  size = 'md',
+  icon,
+  tabIndex,
+  ariaLabel,
+  children,
+  ...rest
+}: Props) {
   const iconOnly = Boolean(icon && (!children || ![children].flat().some((x) => x)))
+  const defaultAria = typeof children === 'string' ? children : ''
 
   const linkStyle = {
     primary:
@@ -55,6 +68,9 @@ export default function NextLink({ className = '', href, style = 'primary', size
     <Link
       href={href}
       className={`${className} items-center justify-center whitespace-nowrap font-medium transition-activity focus:outline-none ${linkStyle[style]} ${buttonSize[size]} ${errorStyle}`}
+      tabIndex={tabIndex}
+      aria-label={ariaLabel ? ariaLabel : defaultAria}
+      {...rest}
     >
       {icon ? <div className={`IconWrap ${iconSize[size]} ${iconOnly ? '' : 'mr-2'}`}>{icon}</div> : null}
       {children}

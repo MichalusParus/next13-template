@@ -10,7 +10,6 @@ type Props = {
   height?: string
   padding?: string
   drawerButton: React.ReactNode
-  role?: string
   children: React.ReactNode | React.ReactNode[]
   setIsOpen: (value: boolean) => void
 }
@@ -25,7 +24,6 @@ export default function Drawer({
   width = 'w-1/3',
   height = 'h-full',
   padding = 'p-lgx',
-  role,
   children,
   setIsOpen,
 }: Props) {
@@ -41,11 +39,11 @@ export default function Drawer({
   }
 
   return (
-    <div className={`DrawerWrap ${className}`} role={role}>
+    <div className={`DrawerWrap ${className}`}>
       <Overlay isOpen={isOpen} onClick={setIsOpen} dark />
       <div className={`relative ${isOpen ? 'z-40' : 'z-20'}`}>{drawerButton}</div>
       <div
-        className={`Drawer z-[35] ${top} ${width} ${height} ${padding} ${drawerTransition} ${drawerType[type]} ${drawerStyle[style]}`}
+        className={`DrawerContent z-[35] ${top} ${width} ${height} ${padding} ${drawerTransition} ${drawerType[type]} ${drawerStyle[style]}`}
       >
         {children}
       </div>

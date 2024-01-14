@@ -19,7 +19,7 @@ export default function Loader({ className = '', style = 'primary', size = 'md' 
   }
 
   return (
-    <div className={`${className} flex w-16 items-center text-center ${loaderSize[size]}`}>
+    <div className={`${className} flex w-16 items-center text-center ${loaderSize[size]}`} aria-label='loader'>
       <div className={`${dottClass} ${loaderStyle[style]}`} />
       <div className={`${dottClass} ${loaderStyle[style]}`} style={{ animationDelay: '150ms' }} />
       <div className={`${dottClass} ${loaderStyle[style]}`} style={{ animationDelay: '300ms' }} />

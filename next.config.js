@@ -1,4 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const withNextIntl = require('next-intl/plugin')()
 
-module.exports = nextConfig
+const nextConfig = {
+  experimental: {
+    webpackBuildWorker: true,
+  },
+}
+
+module.exports = withNextIntl(nextConfig)

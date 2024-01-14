@@ -51,8 +51,8 @@ export default function Table({
 
   const handleSelect = useCallback(
     (row: RowDef) => {
-      if (selectedRows.length > 0 && selectedRows.map((r) => r.id).includes(row._id)) {
-        setSelectedRows(selectedRows.filter((rows) => rows.id !== row._id))
+      if (selectedRows.length > 0 && selectedRows.map((r) => r._id).includes(row._id)) {
+        setSelectedRows(selectedRows.filter((rows) => rows._id !== row._id))
       } else {
         setSelectedRows([...selectedRows, row])
       }

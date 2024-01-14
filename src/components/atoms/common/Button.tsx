@@ -1,6 +1,7 @@
 import Loader from './Loader'
 
 type Props = {
+  id?: string
   className?: string
   type?: 'button' | 'submit'
   style?: 'primary' | 'secondary' | 'menu' | 'delete' | 'none'
@@ -8,6 +9,9 @@ type Props = {
   icon?: React.ReactNode
   isLoading?: boolean
   disabled?: boolean
+  role?: string
+  ariaLabel?: string
+  tabIndex?: number
   children?: string | React.ReactNode
   onClick?: () => void
 }
@@ -20,10 +24,14 @@ export default function Button({
   icon,
   isLoading,
   disabled,
+  role = 'button',
+  ariaLabel,
   children,
   onClick,
+  ...rest
 }: Props) {
   const iconOnly = Boolean(icon && (!children || ![children].flat().some((x) => x)))
+  const defaultAria = typeof children === 'string' ? children : ''
 
   const buttonStyle = {
     primary:
@@ -43,7 +51,7 @@ export default function Button({
     menu:
       'w-full border border-transparent bg-transparent ' +
       'hover:bg-overlay hover:text-text ' +
-      'focus-visible:bg-overlay focus-visible:text-text ' +
+      'focus-within:bg-overlay focus-within:text-text group-focus-within:bg-overlay group-focus-within:text-text ' +
       'active:border-overlay active:bg-overlay active:shadow-active ' +
       '[&.selected]:border-overlay [&.selected]:bg-overlay [&.selected]:text-bg [&.selected]:shadow-active ',
     delete:
@@ -77,6 +85,9 @@ export default function Button({
       disabled={disabled}
       onClick={onClick}
       tabIndex={disabled ? -1 : 0}
+      role={role}
+      aria-label={ariaLabel ? ariaLabel : defaultAria}
+      {...rest}
     >
       {isLoading ? (
         <Loader style={loaderStyle} size={size} />

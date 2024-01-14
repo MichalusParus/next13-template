@@ -1,5 +1,5 @@
 'use client'
-import { forwardRef, useCallback, useState } from 'react'
+import { forwardRef, useCallback, useEffect, useRef, useState } from 'react'
 import { Label, Props as LabelProps } from '../Label'
 import Button from '../../../atoms/common/Button'
 import Dropdown from '@/src/components/molecules/popover/Dropdown'
@@ -37,21 +37,72 @@ export const Select = forwardRef(
     }: Props,
     ref
   ) => {
+    const listboxRef = useRef<any>(null)
+    const buttonRef = useRef<any>(null)
     const [isOpen, setIsOpen] = useState(false)
     const sortedOptions = type === 'top' ? [...options].reverse() : options
     const selectedOption = options.find((option) => option.value === value)
 
     const handleOnChange = useCallback(
       (value: string | number) => {
+        buttonRef.current.focus()
         onChange(value)
         setIsOpen(false)
       },
       [onChange]
     )
 
+    // Focus Trap
+    useEffect(() => {
+      if (isOpen) {
+        let index = -1
+        const focusableEl = listboxRef.current.querySelectorAll('.SelectOption')
+        buttonRef.current = document.activeElement
+        const handleClick = (e: any) => {
+          switch (e.keyCode) {
+            case 40:
+              e.preventDefault()
+              if (index + 1 === focusableEl.length) {
+                focusableEl[0].focus()
+                index = 0
+              } else {
+                focusableEl[index + 1].focus()
+                index++
+              }
+              break
+            case 38:
+              e.preventDefault()
+              if (index <= 0) {
+                focusableEl[focusableEl.length - 1].focus()
+                index = focusableEl.length - 1
+              } else {
+                focusableEl[index - 1].focus()
+                index--
+              }
+              break
+            case 27:
+              e.preventDefault()
+              buttonRef.current.focus()
+              setIsOpen(false)
+              break
+            case 9:
+              e.preventDefault()
+              break
+            default:
+              break
+          }
+        }
+        window.addEventListener('keydown', handleClick)
+        return () => {
+          window.removeEventListener('keydown', handleClick)
+        }
+      }
+    }, [isOpen, handleOnChange])
+
     return (
       <Label
         className={className}
+        name={name}
         label={label}
         style={style}
         size={size}
@@ -71,16 +122,37 @@ export const Select = forwardRef(
           overlay
           error={Boolean(error)}
           setIsOpen={setIsOpen}
-          role={'select'}
+          dropdownButton={
+            <Button
+              className={`DropdownButton relative w-full justify-between pr-8 ${isOpen ? 'selected' : ''} ${
+                error ? 'error' : ''
+              }`}
+              onClick={() => setIsOpen(!isOpen)}
+              style={style}
+              size={size}
+              role='combobox'
+              aria-labelledby={`${name}-label`}
+              aria-haspopup='listbox'
+              aria-expanded={isOpen}
+              aria-controls={`${name}-listbox`}
+            >
+              {selectedOption?.label || <div className='text-placeholder'>{placeholder}</div>}
+            </Button>
+          }
         >
-          <ul>
+          <ul id={`${name}-listbox`} role='listbox' aria-labelledby={`${name}-label`} ref={listboxRef}>
             {sortedOptions.map(({ value: optionValue, label }) => (
-              <li key={optionValue} role='option' aria-selected={optionValue === value}>
+              <li
+                className='group focus:outline-none'
+                key={optionValue}
+                role='option'
+                aria-selected={optionValue === value}
+              >
                 <Button
-                  onClick={() => handleOnChange(optionValue)}
-                  className={`${optionValue === value ? 'selected' : ''}`}
+                  className={`SelectOption ${optionValue === value ? 'selected' : ''}`}
                   style='menu'
                   size={size}
+                  onClick={() => handleOnChange(optionValue)}
                 >
                   {label}
                 </Button>
@@ -89,6 +161,7 @@ export const Select = forwardRef(
           </ul>
         </Dropdown>
         <select
+          id={name}
           name={name}
           value={value}
           onChange={onChange}

@@ -1,5 +1,5 @@
-import { useCallback } from 'react'
-import { availablePages } from '@/src/utils/utils'
+import { useCallback, useEffect, useRef } from 'react'
+import { useTranslations } from 'next-intl'
 import Button from '../../atoms/common/Button'
 import ChevronIcon from '../../atoms/icons/ChevronIcon'
 
@@ -23,6 +23,8 @@ export default function StaticPagination({
   setSelectedPage,
 }: Props) {
   const sidePagesCount = (pageSpread - 5) / 2
+  const t = useTranslations('common')
+  const paginationRef = useRef<any>(null)
 
   const aroundPages = useCallback(() => {
     if (selectedPage < sidePagesCount + 4) {
@@ -34,6 +36,56 @@ export default function StaticPagination({
   }, [selectedPage, sidePagesCount, pages])
 
   const displayablePages = pages.length > sidePagesCount * 2 + 6 ? aroundPages() : pages
+
+  // Focus Trap
+  useEffect(() => {
+    let index = 0
+    let open = false
+    const focusableEl = paginationRef.current.querySelectorAll(
+      '.PageButton, .LeftChevronButton:not(.hidden), .RightChevronButton:not(.hidden)'
+    )
+    const handleClick = (e: any) => {
+      if ((e.target.id === `StaticPaginationWrap` && e.keyCode === 13) || (e.keyCode === 32 && !open)) {
+        e.preventDefault()
+        open = true
+        focusableEl[0].focus()
+      } else if (open) {
+        switch (e.keyCode) {
+          case 39:
+            e.preventDefault()
+            if (index + 1 === focusableEl.length) {
+              focusableEl[0].focus()
+              index = 0
+            } else {
+              focusableEl[index + 1].focus()
+              index++
+            }
+            break
+          case 37:
+            e.preventDefault()
+            if (index <= 0) {
+              focusableEl[focusableEl.length - 1].focus()
+              index = focusableEl.length - 1
+            } else {
+              focusableEl[index - 1].focus()
+              index--
+            }
+            break
+          case 27:
+            e.preventDefault()
+            open = false
+            paginationRef.current.focus()
+            break
+          default:
+            break
+        }
+      }
+    }
+    window.addEventListener('keydown', handleClick)
+    return () => {
+      window.removeEventListener('keydown', handleClick)
+    }
+  }, [selectedPage])
 
   const buttonSize = {
     sm: 'min-w-[2rem] mx-1 ',
@@ -53,9 +105,12 @@ export default function StaticPagination({
 
   return (
     <div
-      className={`StaticPaginationWrap ${className} relative flex items-center justify-center ${
+      className={`StaticPaginationWrap ${className} relative flex items-center justify-center focus:outline-offset-8 focus:outline-text ${
         pages.length > 1 ? 'visible' : 'invisible'
       }`}
+      ref={paginationRef}
+      tabIndex={0}
+      aria-label={t('pagination')}
     >
       <Button
         className={`LeftChevronButton absolute top-1/2 translate-y-[-50%] [&_svg]:rotate-90 ${chevronPosition[size]} ${
@@ -65,15 +120,18 @@ export default function StaticPagination({
         size={size}
         icon={<ChevronIcon />}
         onClick={() => setSelectedPage(selectedPage - 1)}
+        tabIndex={-1}
+        aria-label={`${t('previousPage')} ${selectedPage - 1}`}
       />
       {pages.length > sidePagesCount * 2 + 6 && selectedPage > sidePagesCount + 3 ? (
         <Button
-          key={pages[0]}
           className={`PageButton ${selectedPage === pages[0] ? 'selected' : ''} ${buttonSize[size]}`}
           style={style}
           size={size}
           icon={String(pages[0])}
           onClick={() => setSelectedPage(pages[0])}
+          tabIndex={-1}
+          aria-label={`${t('page')} ${pages[0]}`}
         />
       ) : null}
       {pages.length > sidePagesCount * 2 + 6 && selectedPage > sidePagesCount + 3 ? (
@@ -91,6 +149,8 @@ export default function StaticPagination({
           size={size}
           icon={String(page)}
           onClick={() => setSelectedPage(page)}
+          tabIndex={-1}
+          aria-label={`${t('page')} ${page}`}
         />
       ))}
       {pages.length > sidePagesCount * 2 + 6 && selectedPage < pages.length - (sidePagesCount + 2) ? (
@@ -102,12 +162,13 @@ export default function StaticPagination({
       ) : null}
       {pages.length > sidePagesCount * 2 + 6 && selectedPage < pages.length - (sidePagesCount + 2) ? (
         <Button
-          key={pages[pages.length - 1]}
           className={`PageButton ${selectedPage === pages[pages.length - 1] ? 'selected' : ''} ${buttonSize[size]}`}
           style={style}
           size={size}
           icon={String(pages[pages.length - 1])}
           onClick={() => setSelectedPage(pages[pages.length - 1])}
+          tabIndex={-1}
+          aria-label={`${t('page')} ${pages[pages.length - 1]}`}
         />
       ) : null}
       <Button
@@ -118,6 +179,8 @@ export default function StaticPagination({
         size={size}
         icon={<ChevronIcon />}
         onClick={() => setSelectedPage(selectedPage + 1)}
+        tabIndex={-1}
+        aria-label={`${t('nextPage')} ${selectedPage + 1}`}
       />
     </div>
   )

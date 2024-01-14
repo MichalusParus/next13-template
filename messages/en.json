@@ -1,0 +1,138 @@
+{
+  "common": {
+    "tableSearch": "Search in",
+    "back": "Back",
+    "edit": "Edit",
+    "delete": "Delete",
+    "notFound": "Not Found",
+    "navigation": "Navigation",
+    "rows": "Rows",
+    "sortIn": "Sort in",
+    "filterIn": "Filter in",
+    "selectAll": "Select all",
+    "noresult": "No results",
+    "page": "Page",
+    "pagination": "Pagination",
+    "nextPage": "Next page",
+    "previousPage": "Previous page"
+  },
+  "errors": {
+    "required": "{field} is required",
+    "tooShort": "Min {number} characters",
+    "tooLong": "Max {number} characters",
+    "wrongFormat": "Wrong format",
+    "invalidEmailOrPass": "Invalid e-mail or password",
+    "passMatch": "Passwords must match"
+  },
+  "home": {
+    "navLabel": "Home",
+    "metadata": "Home",
+    "title": "HomePage",
+    "info": "This is homepage of Next13 Template."
+  },
+  "about": {
+    "navLabel": "About",
+    "metadata": "About",
+    "title": "About",
+    "commits": "Commits"
+  },
+  "components": {
+    "navLabel": "Components",
+    "metadata": "Components",
+    "title": "Components"
+  },
+  "tasks": {
+    "navLabel": "Tasks",
+    "metadata": "Tasks",
+    "in-progress": "In Progress",
+    "to-do": "To Do",
+    "completed": "Completed",
+    "backlog": "Backlog",
+    "noTasks": "No task here! Choose new task!",
+    "title": "Title",
+    "description": "Description",
+    "comment": "Comment",
+    "status": "Status",
+    "createdAt": "Created at",
+    "startedAt": "Started at",
+    "completedAt": "Completed at",
+    "start": "Start",
+    "completeConfirm": "Did you really completed task?",
+    "deleteConfirm": "Do you really want to delete task?",
+    "create": {
+      "title": "Create New Task",
+      "submit": "Create New Task",
+      "successMessage": "Task was added",
+      "continue": "Continue"
+    },
+    "update": {
+      "title": "Update Task",
+      "submit": "Update Task",
+      "successMessage": "Task was updated",
+      "continue": "Continue"
+    }
+  },
+  "search": {
+    "metadata": "Search",
+    "title": "Search for",
+    "search": "Search"
+  },
+  "login": {
+    "metadata": "Log In",
+    "title": "Log In",
+    "submit": "Log In",
+    "noAccount": "Don't have an account?",
+    "signup": "Sign Up",
+    "email": "E-mail",
+    "password": "Password"
+  },
+  "signup": {
+    "metadata": "Sign Up",
+    "title": "Create your account",
+    "submit": "Sign Up",
+    "haveAccount": "Already have an account?",
+    "login": "Log In",
+    "name": "Name",
+    "email": "E-mail",
+    "password": "Password",
+    "repeat": "Repeat Password",
+    "successMessage": "New user created, log in to continue"
+  },
+  "profile": {
+    "metadata": "Profile",
+    "title": "User profile",
+    "email": "E-mail",
+    "role": "Role",
+    "update": {
+      "button": "Update Info",
+      "title": "Edit account information",
+      "name": "Name",
+      "submit": "Update information",
+      "successMessage": "Account information was updated",
+      "continue": "Continue"
+    },
+    "changePass": {
+      "button": "Change Pass",
+      "title": "Change your password",
+      "password": "Password",
+      "newPassword": "New Password",
+      "repeatNew": "Repeat New Password",
+      "submit": "Change Password",
+      "successMessage": "Your password was changed",
+      "continue": "Continue"
+    },
+    "signout": "Sign Out",
+    "settings": "Settings",
+    "language": "Language",
+    "en": "English",
+    "cs": "Czech"
+  },
+  "admin": {
+    "metadata": "Admin",
+    "users": "Users",
+    "name": "Name",
+    "email": "E-mail",
+    "role": "Role",
+    "deleteUsers": "Delete Users"
+  }
+}

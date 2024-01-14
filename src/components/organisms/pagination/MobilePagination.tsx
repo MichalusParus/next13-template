@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl'
 import Button from '../../atoms/common/Button'
 import ChevronIcon from '../../atoms/icons/ChevronIcon'
 
@@ -18,6 +19,8 @@ export default function MobilePagination({
   size = 'md',
   setSelectedPage,
 }: Props) {
+  const t = useTranslations('common')
+
   const arrowPosition = {
     left: 'absolute -left-10 top-1/2 translate-y-[-50%] rotate-90',
     right: 'absolute -right-10 top-1/2 translate-y-[-50%] -rotate-90',
@@ -45,6 +48,7 @@ export default function MobilePagination({
           size={size}
           icon={<ChevronIcon />}
           onClick={() => setSelectedPage(selectedPage - 1)}
+          aria-label={`${t('previousPage')} ${selectedPage - 1}`}
         />
         {selectedPage} / {pages.length || 1}
         <Button
@@ -55,6 +59,7 @@ export default function MobilePagination({
           size={size}
           icon={<ChevronIcon />}
           onClick={() => setSelectedPage(selectedPage + 1)}
+          aria-label={`${t('nextPage')} ${selectedPage + 1}`}
         />
       </div>
     </div>

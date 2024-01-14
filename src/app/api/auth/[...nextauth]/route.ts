@@ -28,9 +28,6 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
-  pages: {
-    signIn: routes.login,
-  },
   session: {
     strategy: 'jwt',
     maxAge: 20 * 60,

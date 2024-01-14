@@ -81,6 +81,7 @@ const config: Config = {
         error: '0 0 6px 0 #C55959, inset 0 0 6px 0 #C55959',
       },
       transitionProperty: {
+        colors: 'color, background-color, border-color, text-decoration-color, fill, stroke, opacity',
         dropdown: 'top, left, bottom, right, transform, opacity',
         activity: 'background-color, color, box-shadow',
         disableAutofill: 'backgroundColor 600000s 0s, color 600000s 0s',

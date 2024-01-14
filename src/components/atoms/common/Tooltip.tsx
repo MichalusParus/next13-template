@@ -16,7 +16,7 @@ export default function Tooltip({ className = '', type = 'top', title, children 
     'hover:visible hover:opacity-100 group-hover/tooltip:visible group-hover/tooltip:opacity-100 group-focus-within/tooltip:visible group-focus-within/tooltip:opacity-100 '
 
   return (
-    <div className={`TooltipWrap group/tooltip relative`}>
+    <div className={`TooltipWrap group/tooltip relative`} role='tooltip' aria-label={title}>
       <div
         className={`Tooltip ${className} m-2 px-smx py-smy text-sm ${tooltipStyle} ${tooltipPosition[type]} ${tooltipVisibility}`}
       >

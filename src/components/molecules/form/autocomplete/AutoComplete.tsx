@@ -1,5 +1,5 @@
 'use client'
-import { forwardRef, useCallback, useEffect, useState } from 'react'
+import { forwardRef, useCallback, useEffect, useRef, useState } from 'react'
 import { Label, Props as LabelProps } from '../Label'
 import { Input } from '../input/Input'
 import Button from '../../../atoms/common/Button'
@@ -38,6 +38,8 @@ export const AutoComplete = forwardRef(
     }: Props,
     ref
   ) => {
+    const listboxRef = useRef<any>(null)
+    const buttonRef = useRef<any>(null)
     const [inputValue, setInputValue] = useState<string>('')
     const [isOpen, setIsOpen] = useState(false)
     const filteredOptions =
@@ -45,12 +47,13 @@ export const AutoComplete = forwardRef(
         ? options
         : options.filter(({ label }) => label.toLowerCase().includes(inputValue.toLowerCase()))
 
-    const handleChange = useCallback(
+    const handleOnChange = useCallback(
       (target: string) => {
         const selectedOption = options.find(({ value }) => value === target) || options[0]
         onChange(selectedOption.value)
         setInputValue(selectedOption.label)
         setIsOpen(false)
+        buttonRef.current.focus()
       },
       [onChange, options]
     )
@@ -71,9 +74,46 @@ export const AutoComplete = forwardRef(
       }
     }, [isOpen, inputValue, options, value, onChange])
 
+    // Focus Trap
     useEffect(() => {
+      let index = -1
+      const focusableEl = listboxRef.current.querySelectorAll('.AutoCompleteOption, .AutoCompleteCreate')
+      buttonRef.current = document.activeElement
       const handleClick = (e: any) => {
-        if (e.target.id === `AutoCompleteInput-${name}`) {
+        if (isOpen) {
+          switch (e.keyCode) {
+            case 40:
+              e.preventDefault()
+              if (index + 1 === focusableEl.length) {
+                buttonRef.current.focus()
+                index = -1
+              } else {
+                focusableEl[index + 1].focus()
+                index++
+              }
+              break
+            case 38:
+              e.preventDefault()
+              if (index <= 0) {
+                buttonRef.current.focus()
+                index = -1
+              } else {
+                focusableEl[index - 1].focus()
+                index--
+              }
+              break
+            case 27:
+              e.preventDefault()
+              buttonRef.current.focus()
+              setIsOpen(false)
+              break
+            case 9:
+              e.preventDefault()
+              break
+            default:
+              break
+          }
+        } else if (e.target.id === `AutoCompleteInput-${name}` && e.keyCode !== 9 && !e.shiftKey) {
           setIsOpen(true)
         }
       }
@@ -81,11 +121,12 @@ export const AutoComplete = forwardRef(
       return () => {
         window.removeEventListener('keydown', handleClick)
       }
-    }, [name])
+    }, [isOpen, inputValue, name, handleOnChange])
 
     return (
       <Label
         className={className}
+        name={name}
         label={label}
         style={style}
         size={size}
@@ -102,11 +143,15 @@ export const AutoComplete = forwardRef(
           overlay
           setIsOpen={setIsOpen}
           padding=' '
-          role='combobox'
           dropdownButton={
             <div
               className={`AutoCompleteInputWrap relative w-full ${isOpen ? 'z-40' : 'z-20'}`}
+              role='button'
+              aria-haspopup='listbox'
+              aria-expanded={isOpen}
+              aria-controls={`${name}-listbox`}
               onClick={() => setIsOpen(true)}
+              tabIndex={-1}
             >
               <Input
                 className='mb-1'
@@ -121,49 +166,66 @@ export const AutoComplete = forwardRef(
                 error={error}
                 hideLabel
                 hideError
-                onChange={setInputValue}
+                onChange={(value: string) => setInputValue(value.trimStart())}
+                role='combobox'
                 autoComplete='off'
+                aria-labelledby={`${name}-label`}
+                aria-haspopup='listbox'
+                aria-expanded={isOpen}
+                aria-controls={`${name}-listbox`}
+                aria-autocomplete='list'
               />
             </div>
           }
         >
-          <ul className={`max-h-40 overflow-y-auto`}>
-            {filteredOptions.map(({ value: optionValue, label }) => (
-              <li key={optionValue} role='option' aria-selected={optionValue === value}>
+          <ul id={`${name}-listbox`} ref={listboxRef} role='listbox' aria-labelledby={`${name}-label`}>
+            <div className={`max-h-40 overflow-y-auto`}>
+              {filteredOptions.map(({ value: optionValue, label }) => (
+                <li
+                  id={optionValue}
+                  key={optionValue}
+                  className='group focus:outline-none'
+                  role='option'
+                  aria-selected={optionValue === value}
+                >
+                  <Button
+                    onClick={() => handleOnChange(optionValue)}
+                    className={`AutoCompleteOption ${optionValue === value ? 'selected' : 'nooo'}`}
+                    style='menu'
+                    size={size}
+                    disabled={disabled}
+                  >
+                    {label}
+                  </Button>
+                </li>
+              ))}
+            </div>
+            {createNew ? (
+              <>
+                <div className='mx-auto h-0.5 w-[90%] bg-overlay' />
                 <Button
-                  onClick={() => handleChange(optionValue)}
-                  className={`${optionValue === value ? 'selected' : 'nooo'}`}
+                  className='AutoCompleteCreate'
                   style='menu'
                   size={size}
                   disabled={disabled}
+                  tabIndex={-1}
+                  onClick={createNew.handleCreate}
                 >
-                  {label}
+                  {createNew.title}
                 </Button>
-              </li>
-            ))}
+              </>
+            ) : null}
           </ul>
-          {createNew ? (
-            <>
-              <div className='mx-auto h-0.5 w-[90%] bg-overlay' />
-              <Button
-                className='AutoCompleteCreate'
-                style='menu'
-                size={size}
-                disabled={disabled}
-                onClick={createNew.handleCreate}
-              >
-                {createNew.title}
-              </Button>
-            </>
-          ) : null}
         </Dropdown>
         <select
+          id={name}
           name={name}
           value={value}
           onChange={onChange}
           disabled={disabled}
           className='absolute appearance-none'
           tabIndex={-1}
+          autoComplete='off'
         />
       </Label>
     )

@@ -1,4 +1,4 @@
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@/src/navigation'
 import { useState, useTransition } from 'react'
 
 export const useServerAction = <P, R>(action: (value: P) => Promise<R>) => {
@@ -7,23 +7,24 @@ export const useServerAction = <P, R>(action: (value: P) => Promise<R>) => {
   const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState<string | undefined>()
 
+  const reset = () => {
+    setIsSuccess(false)
+    setError(undefined)
+    router.refresh()
+  }
+
   const runAction = async (args: P) => {
     startTransition(() => {
-      action(args).then((data) => {
-        try {
-          if (!data) {
-            throw new Error('server error, no returned data')
-          } else if (typeof data === 'string') {
-            throw new Error(data)
-          } else {
-            setError(undefined)
-            setIsSuccess(true)
-          }
+      action(args)
+        .then((data) => {
+          setError(undefined)
+          setIsSuccess(true)
           router.refresh()
-        } catch (e: any) {
-          setError(String(e))
-        }
-      })
+        })
+        .catch((e) => {
+          const error = String(e).split(':')
+          setError(error[error.length - 1])
+        })
     })
   }
 
@@ -32,5 +33,6 @@ export const useServerAction = <P, R>(action: (value: P) => Promise<R>) => {
     isLoading: isPending,
     isSuccess: isSuccess,
     error: error,
+    reset: reset,
   }
 }

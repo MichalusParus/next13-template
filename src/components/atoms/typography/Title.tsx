@@ -18,6 +18,7 @@ export default function Title({
   align = 'text-left',
   isLoading,
   children,
+  ...rest
 }: Props) {
   const ghostAlign = align?.split('-')[1] as 'left' | 'center' | 'right'
   const titleStyle = {
@@ -52,37 +53,37 @@ export default function Title({
   switch (type) {
     case 'h1':
       return (
-        <h1 className={`${className} ${titleStyle[style]} ${titleSize[size]} ${align}`}>
+        <h1 className={`${className} ${titleStyle[style]} ${titleSize[size]} ${align}`} {...rest}>
           {isLoading ? <Ghost className={`${ghostSize[size]} ${ghostAligment[ghostAlign]} w-40`} /> : children}
         </h1>
       )
     case 'h2':
       return (
-        <h2 className={`${className} ${titleStyle[style]} ${titleSize[size]} ${align}`}>
+        <h2 className={`${className} ${titleStyle[style]} ${titleSize[size]} ${align}`} {...rest}>
           {isLoading ? <Ghost className={`${ghostSize[size]} ${ghostAligment[ghostAlign]} w-40`} /> : children}
         </h2>
       )
     case 'h3':
       return (
-        <h3 className={`${className} ${titleStyle[style]} ${titleSize[size]} ${align}`}>
+        <h3 className={`${className} ${titleStyle[style]} ${titleSize[size]} ${align}`} {...rest}>
           {isLoading ? <Ghost className={`${ghostSize[size]} ${ghostAligment[ghostAlign]} w-40`} /> : children}
         </h3>
       )
     case 'h4':
       return (
-        <h4 className={`${className} ${titleStyle[style]} ${titleSize[size]} ${align}`}>
+        <h4 className={`${className} ${titleStyle[style]} ${titleSize[size]} ${align}`} {...rest}>
           {isLoading ? <Ghost className={`${ghostSize[size]} ${ghostAligment[ghostAlign]} w-40`} /> : children}
         </h4>
       )
     case 'h5':
       return (
-        <h5 className={`${className} ${titleStyle[style]} ${titleSize[size]} ${align}`}>
+        <h5 className={`${className} ${titleStyle[style]} ${titleSize[size]} ${align}`} {...rest}>
           {isLoading ? <Ghost className={`${ghostSize[size]} ${ghostAligment[ghostAlign]} w-40`} /> : children}
         </h5>
       )
     case 'h6':
       return (
-        <h6 className={`${className} ${titleStyle[style]} ${titleSize[size]} ${align}`}>
+        <h6 className={`${className} ${titleStyle[style]} ${titleSize[size]} ${align}`} {...rest}>
           {isLoading ? <Ghost className={`${ghostSize[size]} ${ghostAligment[ghostAlign]} w-40`} /> : children}
         </h6>
       )

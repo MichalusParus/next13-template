@@ -59,7 +59,7 @@ export const TextArea = forwardRef(
     return (
       <Label
         className={className}
-        htmlFor={name}
+        name={name}
         label={label}
         style={style}
         size={size}

@@ -5,6 +5,7 @@ import TableFilter from './TableFilter'
 import Button from '../../atoms/common/Button'
 import ChevronIcon from '../../atoms/icons/ChevronIcon'
 import Title from '../../atoms/typography/Title'
+import { useTranslations } from 'next-intl'
 
 type Props = {
   name?: string
@@ -33,6 +34,7 @@ export default function Th({
   setSorting,
   handleFilter,
 }: Props) {
+  const t = useTranslations('common')
   const [isFilterOpen, setIsFilterOpen] = useState(false)
 
   const handleSorting = useCallback(() => {
@@ -117,6 +119,7 @@ export default function Th({
           hideError
           hideLabel
           onChange={handleAll}
+          aria-label={t('selectAll')}
         />
       </th>
     )
@@ -132,7 +135,13 @@ export default function Th({
     >
       {setSorting && handleFilter ? (
         <div className='flex items-center justify-between'>
-          <Button className='group peer w-full' style='none' size={size} onClick={handleSorting}>
+          <Button
+            className='group peer w-full'
+            style='none'
+            size={size}
+            ariaLabel={`${t('sortIn')} ${column.label}`}
+            onClick={handleSorting}
+          >
             <div className='flex w-full justify-start'>
               {column.label}
               <ChevronIcon className={`transition-dropdown ${iconRotateState}`} />

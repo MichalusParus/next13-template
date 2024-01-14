@@ -10,6 +10,7 @@ export type Props = InputAttributes &
     style?: 'primary' | 'secondary' | 'none'
     placeholder?: string
     disabled?: boolean
+    ariaLabel?: string
     onChange: any
   }
 
@@ -29,6 +30,7 @@ export const Input = forwardRef(
       hideError,
       disabled,
       error,
+      ariaLabel = 'input',
       onChange,
       ...rest
     }: Props,
@@ -63,7 +65,7 @@ export const Input = forwardRef(
     return (
       <Label
         className={className}
-        htmlFor={name}
+        name={name}
         label={label}
         style={style}
         size={size}
@@ -84,6 +86,7 @@ export const Input = forwardRef(
           onChange={(e) => onChange(e.target.value)}
           disabled={disabled}
           tabIndex={disabled ? -1 : 0}
+          aria-label={ariaLabel}
           {...rest}
         />
       </Label>

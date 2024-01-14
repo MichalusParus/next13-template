@@ -17,6 +17,7 @@ type Props = {
   error?: boolean
   dropdownButton?: React.ReactNode | React.ReactNode[]
   role?: string
+  ariaLabel?: string
   children: React.ReactNode | React.ReactNode[]
   setIsOpen: (value: boolean) => void
 }
@@ -35,10 +36,14 @@ export default function Dropdown({
   isUnlocked,
   error,
   dropdownButton,
+  ariaLabel,
   children,
-  role,
   setIsOpen,
 }: Props) {
+  const buttonIcon = typeof title === 'string' ? null : title
+  const buttonTitle = typeof title === 'string' ? title : ''
+  const buttonAriaLabel = ariaLabel ? ariaLabel : buttonTitle
+
   const dropdownTransition = `transition-dropdown ${isOpen ? `visible opacity-100 ` : 'invisible opacity-0 '}`
   const dropdownType = {
     relative: `rounded-b-md pt-4 ${isOpen ? `max-h-fit -translate-y-2 ` : 'max-h-0 -translate-y-8 '}`,
@@ -70,7 +75,7 @@ export default function Dropdown({
   }
 
   return (
-    <div className={`DropdownWrap ${className} ${!isUnlocked ? 'relative' : ''}`} role={role}>
+    <div className={`DropdownWrap ${className} ${!isUnlocked ? 'relative' : ''}`}>
       <div className={`DropdownButtonWrap relative ${isOpen ? 'z-40' : 'z-20'} ${!hideChevron ? 'w-full' : ''}`}>
         {!dropdownButton ? (
           <Button
@@ -80,9 +85,14 @@ export default function Dropdown({
             onClick={() => setIsOpen(!isOpen)}
             style={style}
             size={size}
-            icon={typeof title != 'string' ? title : null}
+            icon={buttonIcon}
+            role='combobox'
+            aria-haspopup='listbox'
+            aria-expanded={isOpen}
+            aria-controls={buttonAriaLabel}
+            ariaLabel={buttonAriaLabel}
           >
-            {typeof title === 'string' ? title : null}
+            {buttonTitle}
             {!hideChevron ? (
               <ChevronIcon
                 className={`absolute right-2 top-[50%] translate-y-[-50%] transition-transform ${
@@ -103,6 +113,7 @@ export default function Dropdown({
         ) : null}
       </div>
       <div
+        id={buttonAriaLabel}
         className={`DropdownContentWrap z-[35] ${dropdownType[type]} ${dropdownStyle[style]} ${dropdownTransition} ${dropdownSize[size]} ${width}`}
       >
         {children}

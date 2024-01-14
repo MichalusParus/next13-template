@@ -29,7 +29,10 @@ export default function Section({
   }
 
   return (
-    <section className={`${className} ${sectionType[type]} ${sectionStyle[style]} ${padding}`}>
+    <section
+      className={`${className} ${sectionType[type]} ${sectionStyle[style]} ${padding}`}
+      aria-label={title ? title : ''}
+    >
       {title ? (
         <Title className={`mb-8 ${sectionType[type]}`} type='h2' size='2xl'>
           {title}

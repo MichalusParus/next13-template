@@ -130,11 +130,11 @@ export const Checkbox = forwardRef(
               } ${style === 'primary' ? 'text-primary-text' : 'text-secondary-text'} ${labelSize[size]}`}
             >
               <input
+                id={checkboxValue}
                 className={`cursor-pointer appearance-none rounded-lg transition-activity focus:outline-none ${
                   checkboxStyle[style]
                 } ${error ? 'error' : ''} ${errorStyle} ${checkboxSize[size]} ${checkboxlabel === '' ? '' : 'mr-2 '}`}
                 type='checkbox'
-                id={checkboxValue}
                 name={checkboxValue}
                 value={checkboxValue}
                 onChange={(e) => handleOnChange(e.target.value)}

@@ -97,11 +97,11 @@ export const Radio = forwardRef(
             >
               <div className='RadioWrap relative mr-2 flex'>
                 <input
+                  id={radioValue}
                   className={`cursor-pointer appearance-none rounded-full transition-activity focus:outline-none ${afterStyle} ${
                     radioStyle[style]
                   } ${error ? 'error' : ''} ${errorStyle} ${radioSize[size]}`}
                   type='radio'
-                  id={radioValue}
                   name={name}
                   value={radioValue}
                   onChange={(e) => onChange(e.target.value)}

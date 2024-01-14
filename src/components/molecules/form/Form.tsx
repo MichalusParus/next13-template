@@ -47,8 +47,9 @@ export default function Form({
     secondary: 'text-secondary-text',
     none: '',
   }
+
   return (
-    <div className={`relative rounded-xl ${className} ${formStyle[style]}`}>
+    <div className={`FormWrap ${className} relative rounded-xl ${formStyle[style]}`}>
       <FormProvider {...methods}>
         <form
           className={`flex w-full flex-wrap items-center justify-center`}
@@ -57,16 +58,19 @@ export default function Form({
         >
           {children}
           {!hideError ? (
-            <div className='my-2 flex h-6 w-full items-center justify-center'>
+            <div className='ErrorWrap my-2 flex h-6 w-full items-center justify-center'>
               <Error size={size} error={error} />
               <Error type='success' size={size} error={success ? success.message : undefined} />
             </div>
           ) : null}
-          <div className='flex items-center justify-center'>
+          <div className='SuccessWrap flex items-center justify-center'>
             {success ? (
-              <Button size={size} onClick={success.onSuccess}>
-                {success.label}
-              </Button>
+              <>
+                <button className='invisible' type='submit'></button>
+                <Button type='button' style={style} size={size} onClick={success.onSuccess}>
+                  {success.label}
+                </Button>
+              </>
             ) : submit ? (
               <Button
                 className='Submit'

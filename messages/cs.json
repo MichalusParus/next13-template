@@ -1,0 +1,138 @@
+{
+  "common": {
+    "tableSearch": "Hledej v",
+    "back": "Zpět",
+    "edit": "Upravit",
+    "delete": "Smazat",
+    "notFound": "Nenalezeno",
+    "navigation": "Navigace",
+    "rows": "Řádků",
+    "sortIn": "Seřaď dle",
+    "filterIn": "Filtruj dle",
+    "selectAll": "Vyber vše",
+    "noresult": "Žádné výsledky",
+    "page": "Stránka",
+    "pagination": "Stránkování",
+    "nextPage": "Další stránka",
+    "previousPage": "Předchozí stránka"
+  },
+  "errors": {
+    "required": "{field} je vyžadován",
+    "tooShort": "Min {number} znaků",
+    "tooLong": "Max {number} znaků",
+    "wrongFormat": "Špatný formát",
+    "invalidEmailOrPass": "Nesprávný e-mail nebo heslo",
+    "passMatch": "Hesla musí souhlasit"
+  },
+  "home": {
+    "navLabel": "Domů",
+    "metadata": "Domů",
+    "title": "Domaci stranka",
+    "info": "Toto je domaci stranka Next13 Templatu."
+  },
+  "about": {
+    "navLabel": "O Projektu",
+    "metadata": "O Projektu",
+    "title": "O Projektu",
+    "commits": "Commity"
+  },
+  "components": {
+    "navLabel": "Komponenty",
+    "metadata": "Komponenty",
+    "title": "Komponenty"
+  },
+  "tasks": {
+    "navLabel": "Úkoly",
+    "metadata": "Úkoly",
+    "in-progress": "Rozpočaté",
+    "to-do": "K Splnění",
+    "completed": "Splněné",
+    "backlog": "Někdy",
+    "noTasks": "Nezbyl žádný úkol! Vyber nový úkol!",
+    "title": "Titulek",
+    "description": "Popis",
+    "comment": "Komentář",
+    "status": "Status",
+    "createdAt": "Vytvořeno",
+    "startedAt": "Začato",
+    "completedAt": "Splněno",
+    "start": "Začni",
+    "completeConfirm": "Opravdu si splnil úkol?",
+    "deleteConfirm": "Opravdu chceš smazat úkol?",
+    "create": {
+      "title": "Vytvoř Nový Úkol",
+      "submit": "Vytvoř Nový Úkol",
+      "successMessage": "Úkol byl přidán",
+      "continue": "Pokračuj"
+    },
+    "update": {
+      "title": "Uprav Úkol",
+      "submit": "Uprav Úkol",
+      "successMessage": "Úkol byl upraven",
+      "continue": "Pokračuj"
+    }
+  },
+  "search": {
+    "metadata": "Hledat",
+    "title": "Hledat",
+    "search": "Hledej"
+  },
+  "login": {
+    "metadata": "Přihlášení",
+    "title": "Přihlásit se",
+    "submit": "Přihlásit se",
+    "noAccount": "Nemáš ještě účet?",
+    "signup": "Zaregistruj se",
+    "email": "E-mail",
+    "password": "Heslo"
+  },
+  "signup": {
+    "metadata": "Registrace",
+    "title": "Vytvoř si svůj účet",
+    "submit": "Zaregistruj se",
+    "haveAccount": "Již máš svůj účet?",
+    "login": "Přihlaš se",
+    "name": "Jméno",
+    "email": "E-mail",
+    "password": "Heslo",
+    "repeat": "Opakuj Heslo",
+    "successMessage": "Nový uživatel byl přidán, přihlaš se a pokračuj"
+  },
+  "profile": {
+    "metadata": "Profil",
+    "title": "Profil uživatele",
+    "email": "E-mail",
+    "role": "Role",
+    "update": {
+      "button": "Uprav informace",
+      "title": "Uprav profilové informace",
+      "name": "Jméno",
+      "submit": "Uprav informace",
+      "successMessage": "Uživatelské informace byly upraveny",
+      "continue": "Pokračuj"
+    },
+    "changePass": {
+      "button": "Změnit heslo",
+      "title": "Změn své heslo",
+      "password": "Heslo",
+      "newPassword": "Nové Heslo",
+      "repeatNew": "Opakuj Nové Heslo",
+      "submit": "Změn Heslo",
+      "successMessage": "Heslo bylo změněno",
+      "continue": "Pokračuj"
+    },
+    "signout": "Odhlásit se",
+    "settings": "Nastavení",
+    "language": "Jazyk",
+    "en": "Angličtina",
+    "cs": "Čeština"
+  },
+  "admin": {
+    "metadata": "Admin",
+    "users": "Uživatelé",
+    "name": "Jméno",
+    "email": "E-mail",
+    "role": "Role",
+    "deleteUsers": "Smaž Uživatele"
+  }
+}

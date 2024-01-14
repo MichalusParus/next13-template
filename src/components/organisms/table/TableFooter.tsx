@@ -1,4 +1,5 @@
 import { ColumnsDef, RowDef } from './types'
+import { useTranslations } from 'next-intl'
 import { Select } from '../../molecules/form/select/Select'
 import MobilePagination from '../pagination/MobilePagination'
 
@@ -23,6 +24,7 @@ export default function TableFooter({
   setSelectedPage,
   setRowsPerPage,
 }: Props) {
+  const t = useTranslations('common')
   const haveSubColumns = columns.some((col) => col.columns && col.columns.length > 0)
   const mergedSubColumns = columns.map((c) => c.columns).flat()
   const rowPerPageOptions = new Array(5)
@@ -31,7 +33,7 @@ export default function TableFooter({
 
   const handleRowsPerPage = (value: number) => {
     setSelectedPage(1)
-    setRowsPerPage(value)
+    setRowsPerPage(Number(value))
   }
 
   const footerStyle = {
@@ -55,12 +57,12 @@ export default function TableFooter({
         <td colSpan={(haveSubColumns ? mergedSubColumns.length : columns.length) + (multiselect ? 1 : 0)}>
           <div className='relative flex w-full items-center justify-between pl-4 pr-12 text-sm'>
             <div className={`flex w-[4rem] ${pages.length > 1 ? 'visible' : 'invisible'}`}>
-              Rows:
+              {t('rows')}:
               <Select
                 className={`ml-2 [&_.DropdownButton]:pl-2 [&_svg]:right-0 ${selectStyle}`}
                 name='rowsPerPage'
                 type='top'
-                label='rows per page:'
+                label={t('rows')}
                 value={rowsPerPage}
                 options={rowPerPageOptions}
                 style={style}
