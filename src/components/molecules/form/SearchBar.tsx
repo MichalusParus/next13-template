@@ -2,7 +2,7 @@
 import { useCallback } from 'react'
 import { useRouter } from '@/src/navigation'
 import { object } from 'yup'
-import Button from '../../atoms/common/Button'
+import { Button } from '../../atoms/common/Button'
 import SearchIcon from '../../atoms/icons/SearchIcon'
 import Form from './Form'
 import FormInput from './input/FormInput'

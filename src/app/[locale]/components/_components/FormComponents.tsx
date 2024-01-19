@@ -14,6 +14,8 @@ import FormRadio from '@/src/components/molecules/form/radio/FormRadio'
 import FormSelect from '@/src/components/molecules/form/select/FormSelect'
 import FormTextArea from '@/src/components/molecules/form/textarea/FormTextArea'
 import Dropdown from '@/src/components/molecules/popover/Dropdown'
+import FormRange from '@/src/components/molecules/form/range/FormRange'
+import FormMultiSelect from '@/src/components/molecules/form/multiSelect/FormMultiSelect'
 
 export default function FormComponents() {
   const [isLoading, setIsLoading] = useState(false)
@@ -82,10 +84,12 @@ export default function FormComponents() {
         style={'primary'}
         initialValues={{
           input: '',
-          number: undefined,
+          number: 0,
           textarea: '',
           state: '',
+          multiSelect: [],
           region: '',
+          range: 5,
           checkboxGroup: [''],
           checkbox: [''],
           checkboxcolumn: [''],
@@ -150,6 +154,18 @@ export default function FormComponents() {
               ]}
               placeholder='States...'
             />
+            <FormMultiSelect
+              style={style}
+              size={size}
+              name='multiSelect'
+              label='MultiSelect:'
+              options={[
+                { label: 'label1', value: 'value1' },
+                { label: 'label2', value: 'value2' },
+                { label: 'label3', value: 'value3' },
+              ]}
+              placeholder='MultiSelect...'
+            />
             <FormAutoComplete
               style={style}
               size={size}
@@ -163,6 +179,7 @@ export default function FormComponents() {
                 { label: 'label3', value: 'value3' },
               ]}
             />
+            <FormRange name='range' label='Range:' spread={{ min: 0, max: 10 }} style={style} size={size} />
           </div>
           <div className='mx-4 flex w-[30rem] flex-col items-start justify-start'>
             <FormCheckbox

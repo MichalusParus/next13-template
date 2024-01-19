@@ -1,9 +1,9 @@
-import { TextArea, Props as TextAreaProps } from './TextArea'
+import { MultiSelect, Props as SelectProps } from './MultiSelect'
 import { Controller, useFormContext } from 'react-hook-form'
 
-type Props = Omit<TextAreaProps, 'value' | 'error' | 'onChange'>
+type Props = Omit<SelectProps, 'value' | 'error' | 'onChange'>
 
-export default function FormTextArea({ className = '', name, label, ...rest }: Props) {
+export default function FormMultiSelect({ className = '', name, label, ...rest }: Props) {
   const {
     control,
     formState: { errors },
@@ -14,7 +14,7 @@ export default function FormTextArea({ className = '', name, label, ...rest }: P
       name={name}
       control={control}
       render={({ field }) => (
-        <TextArea
+        <MultiSelect
           className={className}
           label={label}
           error={(errors[name]?.message as string) || undefined}

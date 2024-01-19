@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl'
-import Button from '../../atoms/common/Button'
+import { Button } from '../../atoms/common/Button'
 import ChevronIcon from '../../atoms/icons/ChevronIcon'
 
 type Props = {

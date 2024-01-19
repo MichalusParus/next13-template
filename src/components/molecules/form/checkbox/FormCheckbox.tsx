@@ -17,7 +17,7 @@ export default function FormCheckbox({ className = '', name, label, ...rest }: P
         <Checkbox
           className={className}
           label={label}
-          error={errors[name] ? String(errors[name]?.message) : undefined}
+          error={(errors[name]?.message as string) || undefined}
           {...field}
           {...rest}
         />

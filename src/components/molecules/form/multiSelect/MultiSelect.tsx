@@ -1,22 +1,23 @@
 'use client'
 import { forwardRef, useCallback, useEffect, useRef, useState } from 'react'
 import { Label, Props as LabelProps } from '../Label'
+import { Checkbox } from '../checkbox/Checkbox'
 import { Button } from '../../../atoms/common/Button'
 import Dropdown from '@/src/components/molecules/popover/Dropdown'
 
 export type Props = Omit<LabelProps, 'htmlFor'> & {
   name: string
   type?: 'default' | 'top'
-  value: string | number
-  options: { label: string; value: string | number }[]
+  value: any[]
+  options: { label: string; value: any }[]
   style?: 'primary' | 'secondary' | 'none'
   placeholder?: string
   hideError?: boolean
   disabled?: boolean
-  onChange: (value: any) => void
+  onChange: (value: any[]) => void
 }
 
-export const Select = forwardRef(
+export const MultiSelect = forwardRef(
   (
     {
       className = '',
@@ -41,16 +42,27 @@ export const Select = forwardRef(
     const comboboxRef = useRef<HTMLButtonElement>(null)
     const [isOpen, setIsOpen] = useState(false)
     const sortedOptions = type === 'top' ? [...options].reverse() : options
-    const selectedOption = options.find((option) => option.value === value)
-    const comboboxTitle = selectedOption ? selectedOption?.label : <div className='text-placeholder'>{placeholder}</div>
+    const selectedOptions = options.filter((option) => value.includes(option.value))
+    const comboboxTitle = selectedOptions.length ? (
+      <>
+        {selectedOptions.map((option) => {
+          return (
+            <span className='mr-2' key={option.value}>
+              {option.label}
+            </span>
+          )
+        })}
+      </>
+    ) : (
+      <div className='text-placeholder'>{placeholder}</div>
+    )
 
     const handleOnChange = useCallback(
-      (value: string | number) => {
-        comboboxRef.current?.focus()
-        onChange(value)
-        setIsOpen(false)
+      (v: string) => {
+        const newValues = value.includes(v) ? value.filter((val) => val !== v) : [...value, v]
+        onChange(newValues)
       },
-      [onChange]
+      [onChange, value]
     )
 
     // Focus Trap
@@ -63,8 +75,8 @@ export const Select = forwardRef(
             case 40:
               e.preventDefault()
               if (index + 1 === focusableEl.length) {
-                focusableEl[0].focus()
-                index = 0
+                comboboxRef.current?.focus()
+                index = -1
               } else {
                 focusableEl[index + 1].focus()
                 index++
@@ -72,9 +84,12 @@ export const Select = forwardRef(
               break
             case 38:
               e.preventDefault()
-              if (index <= 0) {
+              if (index === -1) {
                 focusableEl[focusableEl.length - 1].focus()
                 index = focusableEl.length - 1
+              } else if (index === 0) {
+                comboboxRef.current?.focus()
+                index = -1
               } else {
                 focusableEl[index - 1].focus()
                 index--
@@ -137,15 +152,15 @@ export const Select = forwardRef(
               aria-expanded={isOpen}
               aria-controls={`${name}-listbox`}
             >
-              {comboboxTitle}
+              <div className='flex w-full justify-start'>{comboboxTitle}</div>
             </Button>
           }
         >
           <ul id={`${name}-listbox`} role='listbox' aria-labelledby={`${name}-label`} ref={listboxRef}>
             {sortedOptions.map(({ value: optionValue, label }) => (
               <li
-                className='group focus:outline-none'
                 key={optionValue}
+                className='group focus:outline-none'
                 role='option'
                 aria-selected={optionValue === value}
               >
@@ -155,7 +170,20 @@ export const Select = forwardRef(
                   size={size}
                   onClick={() => handleOnChange(optionValue)}
                 >
-                  {label}
+                  <div className='flex w-full items-center'>
+                    <Checkbox
+                      className='mr-4'
+                      type='fake'
+                      name={optionValue}
+                      label={label}
+                      value={value}
+                      options={[{ label: label, value: optionValue }]}
+                      hideLabel
+                      hideError
+                      onChange={() => {}}
+                    />
+                    {label}
+                  </div>
                 </Button>
               </li>
             ))}
@@ -163,11 +191,12 @@ export const Select = forwardRef(
         </Dropdown>
         <select
           id={name}
+          className='absolute appearance-none opacity-0'
           name={name}
           value={value}
-          onChange={onChange}
+          multiple={true}
+          onChange={(value) => onChange([value])}
           disabled={disabled}
-          className='absolute appearance-none'
           tabIndex={-1}
         />
       </Label>
@@ -175,4 +204,4 @@ export const Select = forwardRef(
   }
 )
 
-Select.displayName = 'Select'
+MultiSelect.displayName = 'MultiSelect'

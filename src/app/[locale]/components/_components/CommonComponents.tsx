@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { usePagination } from '@/src/utils/hooks/usePagination'
-import Button from '@/src/components/atoms/common/Button'
+import { Button } from '@/src/components/atoms/common/Button'
 import Ghost from '@/src/components/atoms/common/Ghost'
 import Loader from '@/src/components/atoms/common/Loader'
 import NextImage from '@/src/components/atoms/common/NextImage'

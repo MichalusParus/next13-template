@@ -1,5 +1,5 @@
 'use client'
-import Button from '@/src/components/atoms/common/Button'
+import { Button } from '@/src/components/atoms/common/Button'
 import Section from '@/src/components/atoms/common/Section'
 import Tooltip from '@/src/components/atoms/common/Tooltip'
 import CheckIcon from '@/src/components/atoms/icons/CheckIcon'

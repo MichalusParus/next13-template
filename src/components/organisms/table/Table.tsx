@@ -5,7 +5,7 @@ import { usePagination } from '@/src/utils/hooks/usePagination'
 import TBody from './TBody'
 import TableFooter from './TableFooter'
 import TableHeader from './TableHeader'
-import Button from '../../atoms/common/Button'
+import { Button } from '../../atoms/common/Button'
 
 type Props = {
   className?: string

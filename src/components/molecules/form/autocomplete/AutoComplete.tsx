@@ -2,7 +2,7 @@
 import { forwardRef, useCallback, useEffect, useRef, useState } from 'react'
 import { Label, Props as LabelProps } from '../Label'
 import { Input } from '../input/Input'
-import Button from '../../../atoms/common/Button'
+import { Button } from '../../../atoms/common/Button'
 import Dropdown from '@/src/components/molecules/popover/Dropdown'
 
 export type Props = Omit<LabelProps, 'htmlFor'> & {
@@ -39,7 +39,7 @@ export const AutoComplete = forwardRef(
     ref
   ) => {
     const listboxRef = useRef<any>(null)
-    const buttonRef = useRef<any>(null)
+    const comboboxRef = useRef<HTMLInputElement>(null)
     const [inputValue, setInputValue] = useState<string>('')
     const [isOpen, setIsOpen] = useState(false)
     const filteredOptions =
@@ -53,7 +53,9 @@ export const AutoComplete = forwardRef(
         onChange(selectedOption.value)
         setInputValue(selectedOption.label)
         setIsOpen(false)
-        buttonRef.current.focus()
+        if (comboboxRef.current) {
+          comboboxRef.current.focus()
+        }
       },
       [onChange, options]
     )
@@ -78,14 +80,13 @@ export const AutoComplete = forwardRef(
     useEffect(() => {
       let index = -1
       const focusableEl = listboxRef.current.querySelectorAll('.AutoCompleteOption, .AutoCompleteCreate')
-      buttonRef.current = document.activeElement
       const handleClick = (e: any) => {
-        if (isOpen) {
+        if (isOpen && comboboxRef.current) {
           switch (e.keyCode) {
             case 40:
               e.preventDefault()
               if (index + 1 === focusableEl.length) {
-                buttonRef.current.focus()
+                comboboxRef.current.focus()
                 index = -1
               } else {
                 focusableEl[index + 1].focus()
@@ -95,7 +96,7 @@ export const AutoComplete = forwardRef(
             case 38:
               e.preventDefault()
               if (index <= 0) {
-                buttonRef.current.focus()
+                comboboxRef.current.focus()
                 index = -1
               } else {
                 focusableEl[index - 1].focus()
@@ -104,7 +105,7 @@ export const AutoComplete = forwardRef(
               break
             case 27:
               e.preventDefault()
-              buttonRef.current.focus()
+              comboboxRef.current.focus()
               setIsOpen(false)
               break
             case 9:
@@ -113,7 +114,7 @@ export const AutoComplete = forwardRef(
             default:
               break
           }
-        } else if (e.target.id === `AutoCompleteInput-${name}` && e.keyCode !== 9 && !e.shiftKey) {
+        } else if (e.target?.id! && e.target.id === `AutoCompleteInput-${name}` && e.keyCode !== 9 && !e.shiftKey) {
           setIsOpen(true)
         }
       }
@@ -168,6 +169,7 @@ export const AutoComplete = forwardRef(
                 hideError
                 onChange={(value: string) => setInputValue(value.trimStart())}
                 role='combobox'
+                ref={comboboxRef}
                 autoComplete='off'
                 aria-labelledby={`${name}-label`}
                 aria-haspopup='listbox'

@@ -17,7 +17,7 @@ export default function FormInput({ className = '', name, label, ...rest }: Prop
         <Input
           className={className}
           label={label}
-          error={errors[name] ? String(errors[name]?.message) : undefined}
+          error={(errors[name]?.message as string) || undefined}
           autoComplete='off'
           {...field}
           {...rest}

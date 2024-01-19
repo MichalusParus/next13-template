@@ -6,7 +6,7 @@ type Props = {
 }
 
 export default function Tooltip({ className = '', type = 'top', title, children }: Props) {
-  const tooltipStyle = 'rounded-md border border-border bg-bg text-text shadow-button '
+  const tooltipStyle = 'rounded-md border border-primary-text bg-bg text-text shadow-button '
   const tooltipPosition = {
     top: 'absolute bottom-full left-[50%] translate-x-[-50%] ',
     bottom: 'absolute top-full left-[50%] translate-x-[-50%] ',

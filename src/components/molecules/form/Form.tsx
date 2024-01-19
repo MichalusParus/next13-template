@@ -2,7 +2,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { AnyObject, InferType, ObjectSchema } from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Error from './Error'
-import Button from '../../atoms/common/Button'
+import { Button } from '../../atoms/common/Button'
 
 type Props = {
   className?: string

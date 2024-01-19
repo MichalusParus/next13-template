@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react'
-import Button from '../../atoms/common/Button'
+import { Button } from '../../atoms/common/Button'
 import Overlay from '../../atoms/common/Overlay'
 import XIcon from '../../atoms/icons/XIcon'
 import Title from '../../atoms/typography/Title'
@@ -28,16 +28,19 @@ export default function Modal({
   setIsOpen,
 }: Props) {
   const modalRef = useRef<any>(null)
-  const buttonRef = useRef<any>(null)
+  const comboboxRef = useRef<any>(null)
 
   const handleOnClose = useCallback(() => {
-    buttonRef.current!.focus()
+    comboboxRef.current!.focus()
     setIsOpen(!isOpen)
   }, [isOpen, setIsOpen])
 
   // Focus Trap
   useEffect(() => {
-    buttonRef.current = document.activeElement
+    comboboxRef.current = document.activeElement
+  }, [isOpen])
+
+  useEffect(() => {
     const modalElement = modalRef.current
     const focusableEl = modalElement.querySelectorAll(
       'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -47,7 +50,7 @@ export default function Modal({
     if (isOpen) {
       firstElement.focus()
     } else {
-      buttonRef.current.focus()
+      comboboxRef.current.focus()
     }
     const handleClick = (e: any) => {
       if (e.keyCode === 9) {

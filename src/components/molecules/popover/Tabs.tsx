@@ -29,7 +29,7 @@ export default function Tabs({ className = '', name, tabs, style = 'primary', ch
     let open = false
     const focusableEl = tabsref.current.querySelectorAll('.TabLink')
     const handleClick = (e: any) => {
-      if ((e.target.id === `tablist` && e.keyCode === 13) || (e.keyCode === 32 && !open)) {
+      if (e.target.id === `tablist` && (e.keyCode === 13 || (e.keyCode === 32 && !open))) {
         e.preventDefault()
         open = true
         focusableEl[0].focus()
@@ -72,8 +72,8 @@ export default function Tabs({ className = '', name, tabs, style = 'primary', ch
   }, [selectedParams])
 
   const tabsStyle = {
-    primary: 'border border-border bg-primary-500 text-primary-text shadow-button',
-    secondary: 'border border-border bg-secondary-500 text-secondary-text shadow-button',
+    primary: 'border border-primary-text bg-primary-500 text-primary-text shadow-button',
+    secondary: 'border border-secondary-text bg-secondary-500 text-secondary-text shadow-button',
     none: '',
   }
 

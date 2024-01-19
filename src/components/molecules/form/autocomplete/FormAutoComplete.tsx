@@ -17,7 +17,7 @@ export default function FormAutoComplete({ className = '', name, label, ...rest 
         <AutoComplete
           className={className}
           label={label}
-          error={errors[name] ? String(errors[name]?.message) : undefined}
+          error={(errors[name]?.message as string) || undefined}
           {...field}
           {...rest}
         />

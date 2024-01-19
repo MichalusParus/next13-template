@@ -11,7 +11,7 @@ export type Props = InputAttributes &
     placeholder?: string
     disabled?: boolean
     ariaLabel?: string
-    onChange: any
+    onChange: (value: string) => void
   }
 
 export const Input = forwardRef(
@@ -38,15 +38,15 @@ export const Input = forwardRef(
   ) => {
     const inputStyle = {
       primary:
-        'border border-border bg-primary-500 text-primaryInput-text shadow-active ' +
-        'hover:bg-primary-700 hover:text-primary-textHover hover:shadow-active ' +
+        'border border-primary-text bg-primary-500 text-primaryInput-text shadow-button ' +
+        'hover:bg-primary-700 hover:text-primary-textHover hover:shadow-button ' +
         'active:bg-primary-300 active:text-primary-textActive active:shadow-active ' +
         'focus-visible:bg-primary-300 focus-visible:text-primary-textActive focus-visible:shadow-active ' +
         'disabled:border-zinc-800 disabled:bg-zinc-400 disabled:text-zinc-800 disabled:shadow-none disabled:cursor-not-allowed ' +
         'autofill:transition-colors autofill:duration-[1000s] autofill:shadow-active ',
       secondary:
-        'border border-border bg-secondary-500 text-secondary-text shadow-active ' +
-        'hover:bg-secondary-700 hover:text-secondary-textHover hover:shadow-active ' +
+        'border border-secondary-text bg-secondary-500 text-secondary-text shadow-button ' +
+        'hover:bg-secondary-700 hover:text-secondary-textHover hover:shadow-button ' +
         'active:bg-secondary-300 active:text-secondary-textActive active:shadow-active ' +
         'focus-visible:bg-secondary-300 focus-visible:text-secondary-textActive focus-visible:shadow-active ' +
         'disabled:border-zinc-800 disabled:bg-zinc-400 disabled:text-zinc-800 disabled:shadow-none disabled:cursor-not-allowed ' +
@@ -87,6 +87,7 @@ export const Input = forwardRef(
           disabled={disabled}
           tabIndex={disabled ? -1 : 0}
           aria-label={ariaLabel}
+          ref={ref as any}
           {...rest}
         />
       </Label>

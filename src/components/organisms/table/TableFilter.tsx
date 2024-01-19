@@ -1,6 +1,6 @@
 import { ColumnsDef } from './types'
 import { useTranslations } from 'next-intl'
-import Button from '../../atoms/common/Button'
+import { Button } from '../../atoms/common/Button'
 import Dropdown from '../../molecules/popover/Dropdown'
 import FilterIcon from '../../atoms/icons/FilterIcon'
 import SearchBar from '../../molecules/form/SearchBar'

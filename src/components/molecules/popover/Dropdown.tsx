@@ -1,4 +1,4 @@
-import Button from '../../atoms/common/Button'
+import { Button } from '../../atoms/common/Button'
 import ChevronIcon from '../../atoms/icons/ChevronIcon'
 import Overlay from '../../atoms/common/Overlay'
 
@@ -58,8 +58,8 @@ export default function Dropdown({
     }`,
   }
   const dropdownStyle = {
-    primary: 'border border-border bg-primary-300 text-primary-text shadow-active ',
-    secondary: 'border border-border bg-secondary-300 text-secondary-text shadow-active ',
+    primary: 'border border-primary-text bg-primary-300 text-primary-text shadow-active ',
+    secondary: 'border border-secondary-text bg-secondary-300 text-secondary-text shadow-active ',
     none: '',
   }
   const iconStyle = {

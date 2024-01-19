@@ -39,14 +39,14 @@ export const Radio = forwardRef(
       'after:translate-[-50%,-50%] after:invisible after:absolute after:left-[50%] after:top-[50%] after:translate-x-[-50%] after:translate-y-[-50%] after:rounded-full after:bg-primary-text after:content-[""] after:opacity-0 after:transition-opacity checked:after:opacity-100 checked:after:visible'
     const radioStyle = {
       primary:
-        'border border-border bg-primary-500 text-primaryInput-text shadow-active ' +
+        'border border-primary-text bg-primary-500 text-primaryInput-text shadow-active ' +
         'hover:bg-primary-700 hover:text-primary-textHover hover:shadow-active ' +
         'focus-visible:bg-primary-700 focus-visible:text-primary-textActive focus-visible:shadow-active ' +
         'active:bg-primary-700 active:text-primary-textActive active:shadow-active ' +
         'checked:bg-primary-700 checked:text-primary-textActive checked:shadow-active ' +
         'disabled:border-zinc-800 disabled:bg-zinc-400 disabled:text-zinc-800 disabled:shadow-none disabled:cursor-not-allowed ',
       secondary:
-        'border border-border bg-secondary-500 text-secondary-text shadow-active ' +
+        'border border-secondary-text bg-secondary-500 text-secondary-text shadow-active ' +
         'hover:bg-secondary-700 hover:text-secondary-textHover hover:shadow-active ' +
         'focus-visible:bg-secondary-700 focus-visible:text-secondary-textActive focus-visible:shadow-active ' +
         'active:bg-secondary-700 active:text-secondary-textActive active:shadow-active ' +

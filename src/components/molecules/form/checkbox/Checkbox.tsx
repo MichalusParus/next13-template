@@ -55,7 +55,7 @@ export const Checkbox = forwardRef(
 
     const checkboxStyle = {
       primary:
-        'border border-border bg-primary-500 text-primaryInput-text shadow-active ' +
+        'border border-primary-text bg-primary-500 text-primaryInput-text shadow-active ' +
         'hover:bg-primary-700 hover:text-primary-textHover hover:shadow-active ' +
         'focus-visible:bg-primary-700 focus-visible:text-primary-textActive focus-visible:shadow-active ' +
         'active:bg-primary-700 active:text-primary-textActive active:shadow-active ' +
@@ -63,7 +63,7 @@ export const Checkbox = forwardRef(
         '[&.checked]:bg-primary-700 [&.checked]:text-primary-textActive [&.checked]:shadow-active ' +
         'disabled:border-zinc-800 disabled:bg-zinc-400 disabled:text-zinc-800 disabled:shadow-none disabled:cursor-not-allowed ',
       secondary:
-        'border border-border bg-secondary-500 text-secondary-text shadow-active ' +
+        'border border-secondary-text bg-secondary-500 text-secondary-text shadow-active ' +
         'hover:bg-secondary-700 hover:text-secondary-textHover hover:shadow-active ' +
         'focus-visible:bg-secondary-700 focus-visible:text-secondary-textActive focus-visible:shadow-active ' +
         'active:bg-secondary-700 active:text-secondary-textActive active:shadow-active ' +
@@ -96,7 +96,7 @@ export const Checkbox = forwardRef(
     if (type === 'fake') {
       return (
         <div
-          className={`relative cursor-pointer appearance-none rounded-lg focus:outline-none ${
+          className={`${className} relative cursor-pointer appearance-none rounded-lg focus:outline-none ${
             isChecked(options[0].value) ? 'checked' : ''
           } ${checkboxStyle[style]} ${error ? 'error' : ''} ${errorStyle} ${checkboxSize[size]}`}
         >

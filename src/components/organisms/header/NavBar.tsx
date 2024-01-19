@@ -1,7 +1,7 @@
 'use client'
 import { useCallback } from 'react'
 import { usePathname, useRouter } from '@/src/navigation'
-import Button from '../../atoms/common/Button'
+import { Button } from '../../atoms/common/Button'
 import NextLink from '../../atoms/common/NextLink'
 
 type Props = {

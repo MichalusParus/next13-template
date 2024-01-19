@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react'
 import { useTranslations } from 'next-intl'
-import Button from '../../atoms/common/Button'
+import { Button } from '../../atoms/common/Button'
 import ChevronIcon from '../../atoms/icons/ChevronIcon'
 
 type Props = {
@@ -98,8 +98,8 @@ export default function StaticPagination({
     lg: '[&.LeftChevronButton]:-left-16 [&.RightChevronButton]:-right-16',
   }
   const dottStyle = {
-    primary: 'shadow-active border border-border rounded-full bg-primary-500 w-2 h-2',
-    secondary: 'shadow-active border border-border rounded-full bg-secondary-500 w-2 h-2',
+    primary: 'shadow-active border border-primary-text rounded-full bg-primary-500 w-2 h-2',
+    secondary: 'shadow-active border border-secondary-text rounded-full bg-secondary-500 w-2 h-2',
     none: '',
   }
 
