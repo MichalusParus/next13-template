@@ -1,6 +1,5 @@
 'use client'
 import { useRef } from 'react'
-import { useSearchParams } from 'next/navigation'
 import { useRouter } from '@/src/navigation'
 import { object, string } from 'yup'
 import { TaskType } from '../_utils/types'
@@ -21,26 +20,23 @@ const initialValues = {
 }
 
 type Props = {
-  data: TaskType[]
-  createTask: (task: TaskType) => Promise<TaskType>
-  updateTask: (task: TaskType) => Promise<TaskType>
+  task?: TaskType
+  onSubmit: (task: TaskType) => Promise<TaskType>
 }
 
-export default function TaskForm({ data, createTask, updateTask }: Props) {
+export default function TaskForm({ task, onSubmit}: Props) {
   const { push } = useRouter()
   const t = useTranslations()
-  const params = useSearchParams().get('id')
-  const editedTask = data.find((d) => d._id === params)
   const newTaskStatus = useRef('in-progress')
   const statusOptions = ['in-progress', 'to-do', 'completed', 'backlog'].map((value) => ({
     label: t(`tasks.${value}`),
     value: value,
   }))
-  const { action, isLoading, isSuccess, error } = useServerAction(editedTask ? updateTask : createTask)
+  const { action, isLoading, isSuccess, error } = useServerAction(onSubmit)
   const successStatus = isSuccess
     ? {
-        label: editedTask ? t('tasks.update.continue') : t('tasks.create.continue'),
-        message: editedTask ? t('tasks.update.successMessage') : t('tasks.create.successMessage'),
+        label: task ? t('tasks.update.continue') : t('tasks.create.continue'),
+        message: task ? t('tasks.update.successMessage') : t('tasks.create.successMessage'),
         onSuccess: () => push(`${privateRoutes.tasks}?tab=${newTaskStatus.current}`),
       }
     : undefined
@@ -59,17 +55,17 @@ export default function TaskForm({ data, createTask, updateTask }: Props) {
     <Section
       className='min-h-[70vh]'
       type='center'
-      title={editedTask ? t('tasks.update.title') : t('tasks.create.title')}
+      title={task ? t('tasks.update.title') : t('tasks.create.title')}
     >
       <Form
         className='mt-8'
         style='primary'
-        initialValues={editedTask ? editedTask : initialValues}
+        initialValues={task ? task : initialValues}
         validationSchema={validationSchema}
         isLoading={isLoading}
         success={successStatus}
         error={error}
-        submit={editedTask ? t('tasks.update.submit') : t('tasks.create.submit')}
+        submit={task ? t('tasks.update.submit') : t('tasks.create.submit')}
         onSubmit={handleSubmit}
       >
         <FormInput

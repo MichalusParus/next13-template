@@ -1,18 +1,22 @@
-import { createTask, deleteTask, getTasks, updateTask } from './_utils/actions'
+import { createTask, deleteTask, getTask, getTasks, updateTask } from './_utils/actions'
 import { getTranslations } from 'next-intl/server'
+import { PageProps } from '@/src/utils/types'
 import TasksGrid from './_components/TaskGrid'
 import Tabs from '@/src/components/molecules/popover/Tabs'
 import TaskForm from './_components/TaskForm'
+import TaskDetail from './_components/TaskDetail'
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
+export async function generateMetadata({ params: { locale } }: PageProps) {
   const t = await getTranslations({ locale, namespace: 'tasks' })
   return {
     title: t('metadata') + ' || Next 13 Template',
   }
 }
 
-export default async function TasksPage() {
+export default async function TasksPage({searchParams}: PageProps) {
+  const isParams = searchParams.id
   const data = await getTasks()
+  const task = isParams ? await getTask(searchParams.id) : undefined
   const t = await getTranslations('tasks')
 
   const tabs = [
@@ -20,28 +24,34 @@ export default async function TasksPage() {
       label: t('in-progress'),
       slug: 'in-progress',
       component: (
-        <TasksGrid data={data} selectedCategory='in-progress' updateTask={updateTask} deleteTask={deleteTask} />
+        <TasksGrid data={data} selectedTab='in-progress' />
       ),
     },
     {
       label: t('to-do'),
       slug: 'to-do',
-      component: <TasksGrid data={data} selectedCategory='to-do' updateTask={updateTask} deleteTask={deleteTask} />,
+      component: <TasksGrid data={data} selectedTab='to-do' />,
     },
     {
       label: t('completed'),
       slug: 'completed',
-      component: <TasksGrid data={data} selectedCategory='completed' updateTask={updateTask} deleteTask={deleteTask} />,
+      component: <TasksGrid data={data} selectedTab='completed' />,
     },
     {
       label: t('backlog'),
       slug: 'backlog',
-      component: <TasksGrid data={data} selectedCategory='backlog' updateTask={updateTask} deleteTask={deleteTask} />,
+      component: <TasksGrid data={data} selectedTab='backlog' />,
     },
     {
       label: '+ ' + t('create.title'),
       slug: 'form',
-      component: <TaskForm data={data} createTask={createTask} updateTask={updateTask} />,
+      component: <TaskForm task={task} onSubmit={isParams ? updateTask : createTask} />,
+    },
+    {
+      label: 'detail',
+      slug: 'detail',
+      component: <TaskDetail task={task} updateTask={updateTask} deleteTask={deleteTask} />,
+      isHidden: true
     },
   ]
 

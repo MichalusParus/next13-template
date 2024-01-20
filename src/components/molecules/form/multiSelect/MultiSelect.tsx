@@ -177,6 +177,8 @@ export const MultiSelect = forwardRef(
                       name={optionValue}
                       label={label}
                       value={value}
+                      style={style}
+                      size={size}
                       options={[{ label: label, value: optionValue }]}
                       hideLabel
                       hideError

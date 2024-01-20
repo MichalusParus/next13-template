@@ -1,44 +1,28 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { TaskType } from '../_utils/types'
-import { useSearchParams } from 'next/navigation'
 import { usePagination } from '@/src/utils/hooks/usePagination'
+import { useTranslations } from 'next-intl'
 import TaskTile from './TaskTile'
 import Section from '@/src/components/atoms/common/Section'
 import Pagination from '@/src/components/organisms/pagination/Pagination'
 import P from '@/src/components/atoms/typography/P'
-import TaskDetail from './TaskDetail'
-import { useTranslations } from 'next-intl'
 
 type Props = {
   data: TaskType[]
-  selectedCategory: string
-  updateTask: (task: TaskType) => Promise<TaskType>
-  deleteTask: (id: string) => Promise<TaskType>
+  selectedTab: string
 }
 
-export default function TasksGrid({ data, selectedCategory, updateTask, deleteTask }: Props) {
-  const searchParams = useSearchParams()
-  const [filteredTasks, setFilteredTasks] = useState(data.filter((d) => d.status === selectedCategory))
-  const [taskData, setTaskData] = useState(filteredTasks[0])
-  const [isDetailOpen, setIsDetailOpen] = useState(false)
+export default function TasksGrid({ data, selectedTab}: Props) {
+  const [filteredTasks, setFilteredTasks] = useState(data.filter((d) => d.status === selectedTab))
   const itemsPerPage = 15
   const t = useTranslations('tasks')
   const { pagedData, pages, selectedPage, setSelectedPage } = usePagination(filteredTasks, itemsPerPage)
 
-  const handleClick = (task: TaskType) => {
-    setTaskData(task)
-    setIsDetailOpen(true)
-  }
-
   useEffect(() => {
-    const filtered = data.filter((d) => d.status === selectedCategory)
+    const filtered = data.filter((d) => d.status === selectedTab)
     setFilteredTasks(filtered)
-  }, [selectedCategory, data])
-
-  useEffect(() => {
-    setIsDetailOpen(false)
-  }, [searchParams])
+  }, [selectedTab, data])
 
   return (
     <Section
@@ -46,14 +30,11 @@ export default function TasksGrid({ data, selectedCategory, updateTask, deleteTa
       type='left'
       padding='p-mdx pb-16 sm:p-lgx sm:pb-20'
     >
-      {isDetailOpen ? (
-        <TaskDetail task={taskData} setIsDetailOpen={setIsDetailOpen} updateTask={updateTask} deleteTask={deleteTask} />
-      ) : (
         <div className='TaskListWrap flex w-full flex-wrap place-content-center place-items-start gap-8'>
           {filteredTasks.length > 0 ? (
             pagedData.map((task) => (
               <div key={task._id} className='w-full sm:w-auto'>
-                <TaskTile task={task} onClick={handleClick} />
+                <TaskTile task={task} />
               </div>
             ))
           ) : (
@@ -68,7 +49,6 @@ export default function TasksGrid({ data, selectedCategory, updateTask, deleteTa
             setSelectedPage={setSelectedPage}
           />
         </div>
-      )}
     </Section>
   )
 }

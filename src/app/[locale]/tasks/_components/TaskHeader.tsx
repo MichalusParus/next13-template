@@ -5,6 +5,7 @@ import { useServerAction } from '@/src/utils/hooks/useServerAction'
 import { useRouter } from '@/src/navigation'
 import { privateRoutes } from '@/src/constants/routes'
 import { Button } from '@/src/components/atoms/common/Button'
+import { useTranslations } from 'next-intl'
 import CheckIcon from '@/src/components/atoms/icons/CheckIcon'
 import DeleteIcon from '@/src/components/atoms/icons/DeleteIcon'
 import DoubleChevronIcon from '@/src/components/atoms/icons/DoubleChevronIcon'
@@ -14,16 +15,14 @@ import Error from '@/src/components/molecules/form/Error'
 import Modal from '@/src/components/molecules/popover/Modal'
 import NextLink from '@/src/components/atoms/common/NextLink'
 import Tooltip from '@/src/components/atoms/common/Tooltip'
-import { useTranslations } from 'next-intl'
 
 type Props = {
   task: TaskType
-  setIsDetailOpen: (value: boolean) => void
   updateTask: (task: TaskType) => Promise<TaskType>
   deleteTask: (_id: string) => Promise<TaskType>
 }
 
-export default function TaskHeader({ task, setIsDetailOpen, updateTask, deleteTask }: Props) {
+export default function TaskHeader({ task, updateTask, deleteTask }: Props) {
   const router = useRouter()
   const t = useTranslations()
   const [isCompleteConfirmOpen, setIsCompleteConfirmOpen] = useState(false)
@@ -62,22 +61,22 @@ export default function TaskHeader({ task, setIsDetailOpen, updateTask, deleteTa
 
   const handleDelete = () => {
     remove(task._id)
-    setIsDetailOpen(false)
     router.push(`${privateRoutes.tasks}?tab=${task.status}`)
   }
 
   return (
     <div className='flex w-full items-center justify-between'>
-      <div className='items-centern flex'>
+      <div className='items-center flex'>
         <Tooltip title={t('common.back')}>
-          <Button
+          <NextLink
             style='none'
+            size='none'
             icon={<DoubleChevronIcon className='h-8 w-8 rotate-90' />}
             ariaLabel={t('common.back')}
-            onClick={() => setIsDetailOpen(false)}
+            href={`${privateRoutes.tasks}?tab=in-progress`}
           />
         </Tooltip>
-        <Title className='hidden md:block' type='h2' size='2xl'>
+        <Title className='hidden md:block ml-2' type='h2' size='2xl'>
           {task.title}
         </Title>
       </div>

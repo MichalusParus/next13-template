@@ -1,22 +1,22 @@
 'use client'
 import { TaskType } from '../_utils/types'
+import { privateRoutes } from '@/src/constants/routes'
 import Title from '@/src/components/atoms/typography/Title'
 import Error from '@/src/components/molecules/form/Error'
 import P from '@/src/components/atoms/typography/P'
-import { Button } from '@/src/components/atoms/common/Button'
+import NextLink from '@/src/components/atoms/common/NextLink'
 
 type Props = {
   task: TaskType
-  onClick: (task: TaskType) => void
 }
 
-export default function LogTile({ task, onClick }: Props) {
+export default function LogTile({ task }: Props) {
   const truncateDescription = (description: string) => {
     return description.slice(0, 85)
   }
 
   return (
-    <Button className='relative h-40 w-full sm:w-52' key={task._id} size='sm' onClick={() => onClick(task)}>
+    <NextLink className='relative h-40 w-full sm:w-52' key={task._id} size='sm' href={`${privateRoutes.tasks}?tab=detail&id=${task._id}`}>
       <div className='my-2 flex min-h-full flex-col'>
         <Title className='text-center text-text' type='h2' size='lg'>
           {task.title}
@@ -33,6 +33,6 @@ export default function LogTile({ task, onClick }: Props) {
           />
         ) : null}
       </div>
-    </Button>
+    </NextLink>
   )
 }

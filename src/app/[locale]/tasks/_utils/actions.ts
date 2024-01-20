@@ -9,6 +9,13 @@ export const getTasks = async (): Promise<any> => {
   return await JSON.parse(JSON.stringify(tasks))
 }
 
+export const getTask = async (id: string): Promise<any> => {
+  'use server'
+  connect()
+  const task = await Task.findById(id)
+  return await JSON.parse(JSON.stringify(task))
+}
+
 export const createTask = async (task: TaskType): Promise<any> => {
   'use server'
   connect()
